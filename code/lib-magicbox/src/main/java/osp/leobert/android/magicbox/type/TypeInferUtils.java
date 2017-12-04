@@ -25,7 +25,7 @@ public class TypeInferUtils {
         }
     }
 
-    private static Type[] primitiveOrItsBoxedTypes = new Type[]{
+    private static Type[] primitiveTypes = new Type[]{
             Type.Boolean,
             Type.Byte,
             Type.Char,
@@ -128,7 +128,8 @@ public class TypeInferUtils {
 
 
     private static Type inferObject(Class<?> fieldClz) {
-        Type type = inferPrimitiveOrItsBoxedTypes(fieldClz);
+        //boxed type will be inferred to be impl of Serializable
+        Type type = inferPrimitiveTypes(fieldClz);
 
         if (type.equals(Type.Infer)) {
             type = inferSimpleType(fieldClz);
@@ -142,10 +143,10 @@ public class TypeInferUtils {
     }
 
 
-    private static Type inferPrimitiveOrItsBoxedTypes(Class<?> clz) {
+    private static Type inferPrimitiveTypes(Class<?> clz) {
         if (clz == null)
             return Type.Null;
-        for (Type type : primitiveOrItsBoxedTypes) {
+        for (Type type : primitiveTypes) {
             if (type.check(clz))
                 return type;
         }

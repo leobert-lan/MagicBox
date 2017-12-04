@@ -12,9 +12,11 @@ import osp.leobert.android.magicbox.type.infer.InferType;
  */
 
 public class SimpleType implements InferType {
-    private final String type;
+//    private final String type;
 
-    public SimpleType(String type) {
+    private final Class<?> type;
+
+    public SimpleType(Class<?> type) {
         this.type = type;
     }
 
@@ -25,7 +27,7 @@ public class SimpleType implements InferType {
 //        return type != null && type.equals(clz.getName());
         //simplify to follow code
 
-        return clz != null && type != null && type.equals(clz.getName());
+        return clz != null && type != null && type.getName().equals(clz.getName());
 
     }
 }

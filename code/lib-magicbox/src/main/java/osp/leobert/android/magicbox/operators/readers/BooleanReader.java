@@ -33,9 +33,7 @@ public class BooleanReader implements BundleReader {
     @Override
     public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
         Field propertyField = field.getField();
-
         propertyField.setAccessible(true);
-
-        propertyField.set(to,bundle.getBoolean(field.getBundleKey()));
+        propertyField.setBoolean(to,bundle.getBoolean(field.getBundleKey()));
     }
 }

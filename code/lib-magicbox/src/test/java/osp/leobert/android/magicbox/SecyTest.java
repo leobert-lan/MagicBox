@@ -27,6 +27,9 @@ public class SecyTest {
 
         @KeepState
         Boolean testNullBoxBool;
+
+        @KeepState
+        String string = "";
     }
 
     Secy secy;

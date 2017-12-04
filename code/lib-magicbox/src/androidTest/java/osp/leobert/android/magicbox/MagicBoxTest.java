@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.type.Type;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox </p>
@@ -24,37 +25,52 @@ public class MagicBoxTest {
         boolean testBool = true;
 
         @KeepState
-        Boolean testNullBoxBool;
+        Boolean testNullBoxBool = true;
 
-        public boolean isTestBool() {
-            return testBool;
+        byte testByte1;
+
+        Byte testByte2;
+
+
+        @KeepState
+        String testString = "this is a test string";
+
+        @KeepState
+        String testNullString = null;
+
+        @KeepState(type = Type.BooleanArray)
+        boolean[] booleans1;
+
+        @KeepState
+        Boolean[] booleans2;
+
+        public void foo() {
+            testBool = false;
+            testNullBoxBool = null;
+            testByte1 = 'a';
+
+            booleans1 = new boolean[2];
+            booleans1[0] = true;
+            booleans1[1] = false;
+
+            booleans2 = new Boolean[2];
+            booleans2[0] = null;
+            booleans2[1] = true;
+
         }
-
-        public void setTestBool(boolean testBool) {
-            this.testBool = testBool;
-        }
-
-        public Boolean getTestNullBoxBool() {
-            return testNullBoxBool;
-        }
-
-        public void setTestNullBoxBool(Boolean testNullBoxBool) {
-            this.testNullBoxBool = testNullBoxBool;
-        }
-
     }
 
     MagicBox magicBox;
     TestClz test1;
     TestClz test2;
     Bundle bundle;
+
     @Before
     public void setUp() throws Exception {
         magicBox = MagicBox.getInstance();
         bundle = new Bundle();
         test1 = new TestClz();
-        test1.setTestBool(false);
-        test1.setTestNullBoxBool(null);
+        test1.foo();
 
         test2 = new TestClz();
 
@@ -63,12 +79,12 @@ public class MagicBoxTest {
 
     //    @Test
     public void saveInstanceState() throws Exception {
-        magicBox.saveInstanceState(test1,bundle);
+        magicBox.saveInstanceState(test1, bundle);
     }
 
     @Test
     public void restoreInstanceState() throws Exception {
-        magicBox.restoreInstanceState(test2,bundle);
+        magicBox.restoreInstanceState(test2, bundle);
         System.out.println(test2);
     }
 

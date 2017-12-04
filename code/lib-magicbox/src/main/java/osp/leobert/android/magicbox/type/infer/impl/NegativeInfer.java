@@ -10,7 +10,7 @@ import osp.leobert.android.magicbox.type.infer.InferType;
  * Created by leobert on 2017/12/1.
  */
 
-public class UnSupportInfer implements InferType {
+public class NegativeInfer implements InferType {
     @Override
     public boolean infer(Class<?> clz) {
         return false;
