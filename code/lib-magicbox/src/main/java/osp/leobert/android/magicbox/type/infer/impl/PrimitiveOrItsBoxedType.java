@@ -26,9 +26,9 @@ public class PrimitiveOrItsBoxedType implements InferType {
         if (clz == null)
             return false;
 
-        if (clz.isPrimitive())
+        if (clz.isPrimitive()) {
             return basic != null && basic.equals(clz.getName());
-        else
+        } else
             return box != null && box.equals(clz.getName());
     }
 }

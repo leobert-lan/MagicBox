@@ -35,6 +35,12 @@ public class BooleanWriter implements BundleWriter {
     public void write(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
         Field propertyField = field.getField();
         propertyField.setAccessible(true);
-        bundle.putBoolean(field.getBundleKey(), propertyField.getBoolean(to));
+        Object value = propertyField.get(to);
+        if (value != null)
+            bundle.putBoolean(field.getBundleKey(), (Boolean) value);
+        else {
+            // TODO: 2017/12/4 log
+        }
+
     }
 }

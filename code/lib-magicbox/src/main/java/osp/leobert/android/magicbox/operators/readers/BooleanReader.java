@@ -36,6 +36,6 @@ public class BooleanReader implements BundleReader {
 
         propertyField.setAccessible(true);
 
-        propertyField.setBoolean(to,bundle.getBoolean(field.getBundleKey()));
+        propertyField.set(to,bundle.getBoolean(field.getBundleKey()));
     }
 }

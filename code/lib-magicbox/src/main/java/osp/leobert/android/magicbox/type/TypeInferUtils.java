@@ -1,12 +1,6 @@
 package osp.leobert.android.magicbox.type;
 
-import osp.leobert.android.magicbox.type.infer.impl.Implementation;
-import osp.leobert.android.magicbox.type.infer.impl.ImplementationArray;
-import osp.leobert.android.magicbox.type.infer.impl.PrimitiveOrItsBoxedType;
-import osp.leobert.android.magicbox.type.infer.impl.PrimitiveOrItsBoxedTypeArray;
-import osp.leobert.android.magicbox.type.infer.impl.SimpleType;
-import osp.leobert.android.magicbox.type.infer.impl.SimpleTypeArray;
-import osp.leobert.android.magicbox.type.infer.impl.UnSupportInfer;
+import java.lang.reflect.Field;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.savedstate.type </p>
@@ -17,60 +11,61 @@ import osp.leobert.android.magicbox.type.infer.impl.UnSupportInfer;
  */
 
 public class TypeInferUtils {
-    public static Types infer(Object obj) {
-        if (obj == null)
-            return Types.Null;
+    public static Type infer(Field field) {
+        if (field == null)
+            return Type.Null;
 
-        boolean isArray = obj.getClass().isArray();
+        boolean isArray = field.getType().isArray();
+        System.out.println(field.getType());
 
         if (isArray) {
-            return inferArray(obj);
+            return inferArray(field.getType());
         } else {
-            return inferObject(obj);
+            return inferObject(field.getType());
         }
     }
 
-    private static Types[] primitiveOrItsBoxedTypes = new Types[]{
-            Types.Boolean,
-            Types.Byte,
-            Types.Char,
-            Types.Short,
-            Types.Int,
-            Types.Long,
-            Types.Float,
-            Types.Double,
+    private static Type[] primitiveOrItsBoxedTypes = new Type[]{
+            Type.Boolean,
+            Type.Byte,
+            Type.Char,
+            Type.Short,
+            Type.Int,
+            Type.Long,
+            Type.Float,
+            Type.Double,
     };
 
-    private static Types[] simpleTypes = new Types[]{
-            Types.String,
-            Types.Size,
-            Types.SizeF
+    private static Type[] simpleTypes = new Type[]{
+            Type.String,
+            Type.Size,
+            Type.SizeF
     };
 
-    private static Types[] implTypes = new Types[]{
-            Types.CharSequence,
-            Types.Parcelable,
-            Types.Serializable
+    private static Type[] implTypes = new Type[]{
+            Type.CharSequence,
+            Type.Parcelable,
+            Type.Serializable
     };
 
-    private static Types[] primitiveOrItsBoxedTypeArrays = new Types[]{
-            Types.BooleanArray,
-            Types.ByteArray,
-            Types.CharArray,
-            Types.ShortArray,
-            Types.IntArray,
-            Types.LongArray,
-            Types.FloatArray,
-            Types.DoubleArray,
+    private static Type[] primitiveOrItsBoxedTypeArrays = new Type[]{
+            Type.BooleanArray,
+            Type.ByteArray,
+            Type.CharArray,
+            Type.ShortArray,
+            Type.IntArray,
+            Type.LongArray,
+            Type.FloatArray,
+            Type.DoubleArray,
     };
 
-    private static Types[] simpleTypeArrays = new Types[]{
-            Types.StringArray
+    private static Type[] simpleTypeArrays = new Type[]{
+            Type.StringArray
     };
 
-    private static Types[] implTypeArrays = new Types[]{
-            Types.CharSequenceArray,
-            Types.ParcelableArray
+    private static Type[] implTypeArrays = new Type[]{
+            Type.CharSequenceArray,
+            Type.ParcelableArray
 //            Types.SerializableArray
     };
 
@@ -82,48 +77,48 @@ public class TypeInferUtils {
 //    Types.StringArrayList,
 //    Types.CharSequenceArrayList,
 
-    private static Types inferArray(Object obj) {
-        Types type = inferPrimitiveOrItsBoxedTypeArray(obj);
+    private static Type inferArray(Class<?> fieldClz) {
+        Type type = inferPrimitiveOrItsBoxedTypeArray(fieldClz);
 
-        if (type.equals(Types.Infer)) {
-            type = inferSimpleTypeArray(obj);
+        if (type.equals(Type.Infer)) {
+            type = inferSimpleTypeArray(fieldClz);
         }
 
-        if (type.equals(Types.Infer)) {
-            type = inferImplArray(obj);
+        if (type.equals(Type.Infer)) {
+            type = inferImplArray(fieldClz);
         }
 
         return type;
     }
 
-    private static Types inferPrimitiveOrItsBoxedTypeArray(Object obj) {
-        if (obj == null)
-            return Types.Null;
-        for (Types type : primitiveOrItsBoxedTypeArrays) {
-            if (type.check(obj.getClass()))
+    private static Type inferPrimitiveOrItsBoxedTypeArray(Class<?> clz) {
+        if (clz == null)
+            return Type.Null;
+        for (Type type : primitiveOrItsBoxedTypeArrays) {
+            if (type.check(clz))
                 return type;
         }
-        return Types.Infer;
+        return Type.Infer;
     }
 
-    private static Types inferSimpleTypeArray(Object obj) {
-        if (obj == null)
-            return Types.Null;
-        for (Types type : simpleTypeArrays) {
-            if (type.check(obj.getClass()))
+    private static Type inferSimpleTypeArray(Class<?> clz) {
+        if (clz == null)
+            return Type.Null;
+        for (Type type : simpleTypeArrays) {
+            if (type.check(clz))
                 return type;
         }
-        return Types.Infer;
+        return Type.Infer;
     }
 
-    private static Types inferImplArray(Object obj) {
-        if (obj == null)
-            return Types.Null;
-        for (Types type : implTypeArrays) {
-            if (type.check(obj.getClass()))
+    private static Type inferImplArray(Class<?> clz) {
+        if (clz == null)
+            return Type.Null;
+        for (Type type : implTypeArrays) {
+            if (type.check(clz.getClass()))
                 return type;
         }
-        return Types.Infer;
+        return Type.Infer;
     }
 
 
@@ -132,48 +127,48 @@ public class TypeInferUtils {
     ///////////////////////////////////////////////////////////////////////////
 
 
-    private static Types inferObject(Object obj) {
-        Types type = inferPrimitiveOrItsBoxedTypes(obj);
+    private static Type inferObject(Class<?> fieldClz) {
+        Type type = inferPrimitiveOrItsBoxedTypes(fieldClz);
 
-        if (type.equals(Types.Infer)) {
-            type = inferSimpleType(obj);
+        if (type.equals(Type.Infer)) {
+            type = inferSimpleType(fieldClz);
         }
 
-        if (type.equals(Types.Infer)) {
-            type = inferImpl(obj);
+        if (type.equals(Type.Infer)) {
+            type = inferImpl(fieldClz);
         }
 
         return type;
     }
 
 
-    private static Types inferPrimitiveOrItsBoxedTypes(Object obj) {
-        if (obj == null)
-            return Types.Null;
-        for (Types type : primitiveOrItsBoxedTypes) {
-            if (type.check(obj.getClass()))
+    private static Type inferPrimitiveOrItsBoxedTypes(Class<?> clz) {
+        if (clz == null)
+            return Type.Null;
+        for (Type type : primitiveOrItsBoxedTypes) {
+            if (type.check(clz))
                 return type;
         }
-        return Types.Infer;
+        return Type.Infer;
     }
 
-    private static Types inferSimpleType(Object obj) {
-        if (obj == null)
-            return Types.Null;
-        for (Types type : simpleTypes) {
-            if (type.check(obj.getClass()))
+    private static Type inferSimpleType(Class<?> clz) {
+        if (clz == null)
+            return Type.Null;
+        for (Type type : simpleTypes) {
+            if (type.check(clz))
                 return type;
         }
-        return Types.Infer;
+        return Type.Infer;
     }
 
-    private static Types inferImpl(Object obj) {
-        if (obj == null)
-            return Types.Null;
-        for (Types type : implTypes) {
-            if (type.check(obj.getClass()))
+    private static Type inferImpl(Class<?> clz) {
+        if (clz == null)
+            return Type.Null;
+        for (Type type : implTypes) {
+            if (type.check(clz))
                 return type;
         }
-        return Types.Infer;
+        return Type.Infer;
     }
 }

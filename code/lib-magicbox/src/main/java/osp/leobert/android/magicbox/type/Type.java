@@ -3,6 +3,8 @@ package osp.leobert.android.magicbox.type;
 
 import osp.leobert.android.magicbox.operators.BundleReader;
 import osp.leobert.android.magicbox.operators.BundleWriter;
+import osp.leobert.android.magicbox.operators.readers.BooleanReader;
+import osp.leobert.android.magicbox.operators.writers.BooleanWriter;
 import osp.leobert.android.magicbox.type.infer.InferType;
 import osp.leobert.android.magicbox.type.infer.impl.Implementation;
 import osp.leobert.android.magicbox.type.infer.impl.ImplementationArray;
@@ -20,11 +22,14 @@ import osp.leobert.android.magicbox.type.infer.impl.UnSupportInfer;
  * Created by leobert on 2017/11/15.
  */
 
-public enum Types {
+public enum Type {
     Infer,
 
     Boolean(new PrimitiveOrItsBoxedType(java.lang.Boolean.class.getName(),
-            boolean.class.getName())),
+            boolean.class.getName()),
+            BooleanWriter.getInstance(),
+            BooleanReader.getInstance()),
+
     Byte(new PrimitiveOrItsBoxedType(java.lang.Byte.class.getName(), byte.class.getName())),
     Char(new PrimitiveOrItsBoxedType(Character.class.getName(), char.class.getName())),
     Short(new PrimitiveOrItsBoxedType(java.lang.Short.class.getName(), short.class.getName())),
@@ -71,11 +76,17 @@ public enum Types {
 
     private BundleReader bundleReader;
 
-    Types() {
+    Type() {
     }
 
-    Types(InferType inferType) {
+    Type(InferType inferType) {
         this.inferType = inferType;
+    }
+
+    Type(InferType inferType, BundleWriter bundleWriter, BundleReader bundleReader) {
+        this.inferType = inferType;
+        this.bundleWriter = bundleWriter;
+        this.bundleReader = bundleReader;
     }
 
     public boolean check(Class clz) {

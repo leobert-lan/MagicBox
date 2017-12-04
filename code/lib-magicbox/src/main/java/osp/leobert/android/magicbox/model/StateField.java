@@ -1,8 +1,14 @@
 package osp.leobert.android.magicbox.model;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+
 import java.lang.reflect.Field;
 
-import osp.leobert.android.magicbox.type.Types;
+import osp.leobert.android.magicbox.MException;
+import osp.leobert.android.magicbox.operators.BundleReader;
+import osp.leobert.android.magicbox.operators.BundleWriter;
+import osp.leobert.android.magicbox.type.Type;
 
 
 /**
@@ -14,7 +20,7 @@ import osp.leobert.android.magicbox.type.Types;
  */
 
 public class StateField {
-    private Types types;
+    private Type type;
     private String bundleKey;
     private String propertyName;
     private Field field;
@@ -22,19 +28,19 @@ public class StateField {
     public StateField() {
     }
 
-    public StateField(String propertyName, Field field, String bundleKey, Types types) {
-        this.types = types;
+    public StateField(String propertyName, Field field, String bundleKey, Type type) {
+        this.type = type;
         this.bundleKey = bundleKey;
         this.propertyName = propertyName;
         this.field = field;
     }
 
-    public Types getTypes() {
-        return types;
+    public Type getType() {
+        return type;
     }
 
-    public void setTypes(Types types) {
-        this.types = types;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public String getBundleKey() {
@@ -59,5 +65,28 @@ public class StateField {
 
     public void setField(Field field) {
         this.field = field;
+    }
+
+    public void save(@NonNull Object object, @NonNull Bundle bundle) {
+        BundleWriter writer = getType().getBundleWriter();
+        // TODO: 2017/12/4  check null
+        try {
+            writer.write(bundle, object, this);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new MException(e.getCause());
+        }
+    }
+
+
+    public void restore(@NonNull Object object, @NonNull Bundle bundle) {
+        BundleReader reader = getType().getBundleReader();
+        // TODO: 2017/12/4  check null
+        try {
+            reader.read(bundle, object, this);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            throw new MException(e.getCause());
+        }
     }
 }

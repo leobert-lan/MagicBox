@@ -2,7 +2,8 @@ package osp.leobert.android.magicbox.operators;
 
 import android.os.Bundle;
 
-import osp.leobert.android.savedstate.model.StateField;
+import osp.leobert.android.magicbox.model.StateField;
+
 
 /**
  * <p><b>Package:</b> osp.leobert.android.savedstate.operators </p>
@@ -16,7 +17,7 @@ public class Operator {
 
     public void writeToBundle(Bundle bundle, Object from, StateField field) {
         try {
-            field.getTypes().getBundleWriter()
+            field.getType().getBundleWriter()
                     .write(bundle,from,field);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -25,7 +26,7 @@ public class Operator {
 
     public void readFromBundle(Bundle bundle, Object to, StateField field) {
         try {
-            field.getTypes().getBundleReader()
+            field.getType().getBundleReader()
                     .read(bundle, to, field);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
