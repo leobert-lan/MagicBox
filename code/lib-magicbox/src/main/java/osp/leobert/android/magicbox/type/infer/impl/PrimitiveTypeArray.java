@@ -1,7 +1,5 @@
 package osp.leobert.android.magicbox.type.infer.impl;
 
-import android.text.TextUtils;
-
 import osp.leobert.android.magicbox.type.infer.InferType;
 
 /**
@@ -12,15 +10,12 @@ import osp.leobert.android.magicbox.type.infer.InferType;
  * Created by leobert on 2017/11/19.
  */
 
-public class PrimitiveOrItsBoxedTypeArray implements InferType {
+public class PrimitiveTypeArray implements InferType {
 
     private final Class<?> primitiveComponentClz;
 
-    private final Class<?> boxedComponentClz;
-
-    public PrimitiveOrItsBoxedTypeArray(Class<?> primitiveComponentClz, Class<?> boxedComponentClz) {
+    public PrimitiveTypeArray(Class<?> primitiveComponentClz) {
         this.primitiveComponentClz = primitiveComponentClz;
-        this.boxedComponentClz = boxedComponentClz;
     }
 
     @Override
@@ -32,8 +27,7 @@ public class PrimitiveOrItsBoxedTypeArray implements InferType {
         Class componentClass = clz.getComponentType();
         String componentName = componentClass.getName();
 
-        return primitiveComponentClz.getName().equals(componentName) ||
-                boxedComponentClz.getName().equals(componentName);
+        return primitiveComponentClz.getName().equals(componentName);
     }
 
 

@@ -30,6 +30,13 @@ public class SecyTest {
 
         @KeepState
         String string = "";
+
+        @KeepState
+        boolean[] booleans = new boolean[2];
+
+        @KeepState
+        Boolean[] booleans2 = new Boolean[2]; //cannot infer
+
     }
 
     Secy secy;

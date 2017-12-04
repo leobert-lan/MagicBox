@@ -48,7 +48,7 @@ public class TypeInferUtils {
             Type.Serializable
     };
 
-    private static Type[] primitiveOrItsBoxedTypeArrays = new Type[]{
+    private static Type[] primitiveTypeArrays = new Type[]{
             Type.BooleanArray,
             Type.ByteArray,
             Type.CharArray,
@@ -78,7 +78,7 @@ public class TypeInferUtils {
 //    Types.CharSequenceArrayList,
 
     private static Type inferArray(Class<?> fieldClz) {
-        Type type = inferPrimitiveOrItsBoxedTypeArray(fieldClz);
+        Type type = inferPrimitiveTypeArray(fieldClz);
 
         if (type.equals(Type.Infer)) {
             type = inferSimpleTypeArray(fieldClz);
@@ -91,10 +91,10 @@ public class TypeInferUtils {
         return type;
     }
 
-    private static Type inferPrimitiveOrItsBoxedTypeArray(Class<?> clz) {
+    private static Type inferPrimitiveTypeArray(Class<?> clz) {
         if (clz == null)
             return Type.Null;
-        for (Type type : primitiveOrItsBoxedTypeArrays) {
+        for (Type type : primitiveTypeArrays) {
             if (type.check(clz))
                 return type;
         }

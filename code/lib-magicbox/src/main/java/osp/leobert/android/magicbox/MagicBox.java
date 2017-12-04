@@ -7,6 +7,8 @@ import java.util.List;
 
 import osp.leobert.android.magicbox.model.StateField;
 
+import static osp.leobert.android.magicbox.log.ILogger.logger;
+
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox </p>
  * <p><b>Project:</b> code </p>
@@ -23,6 +25,7 @@ public class MagicBox {
     private MagicBox() {
         // single
         secy = Secy.getInstance();
+        logger.setDefaultTag("[MagicBox] ");
     }
 
     public static MagicBox getInstance() {
@@ -31,8 +34,11 @@ public class MagicBox {
         return instance;
     }
 
+    public void setLogEnable(boolean enable) {
+        logger.showLog(enable);
+    }
+
     public void saveInstanceState(@NonNull Object object, @NonNull Bundle bundle) {
-        // TODO analyse the whole fields with notation, and maintain a mapper as a cache
         List<StateField> strategy = secy.fetchStrategy(object);
 
         for (StateField field:strategy) {

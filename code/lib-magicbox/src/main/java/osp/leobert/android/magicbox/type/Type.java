@@ -1,7 +1,6 @@
 package osp.leobert.android.magicbox.type;
 
 
-
 import osp.leobert.android.magicbox.operators.BundleReader;
 import osp.leobert.android.magicbox.operators.BundleWriter;
 import osp.leobert.android.magicbox.operators.readers.BooleanArrayReader;
@@ -11,15 +10,21 @@ import osp.leobert.android.magicbox.operators.readers.ByteReader;
 import osp.leobert.android.magicbox.operators.readers.CharArrayReader;
 import osp.leobert.android.magicbox.operators.readers.CharReader;
 import osp.leobert.android.magicbox.operators.readers.DefaultReader;
+import osp.leobert.android.magicbox.operators.readers.DoubleArrayReader;
+import osp.leobert.android.magicbox.operators.readers.FloatArrayReader;
 import osp.leobert.android.magicbox.operators.readers.FloatReader;
+import osp.leobert.android.magicbox.operators.readers.IntArrayReader;
 import osp.leobert.android.magicbox.operators.readers.IntReader;
+import osp.leobert.android.magicbox.operators.readers.LongArrayReader;
 import osp.leobert.android.magicbox.operators.readers.LongReader;
+import osp.leobert.android.magicbox.operators.readers.ParcelableArrayReader;
 import osp.leobert.android.magicbox.operators.readers.ParcelableReader;
 import osp.leobert.android.magicbox.operators.readers.SerializableReader;
 import osp.leobert.android.magicbox.operators.readers.ShortArrayReader;
 import osp.leobert.android.magicbox.operators.readers.ShortReader;
 import osp.leobert.android.magicbox.operators.readers.SizeFReader;
 import osp.leobert.android.magicbox.operators.readers.SizeReader;
+import osp.leobert.android.magicbox.operators.readers.StringArrayReader;
 import osp.leobert.android.magicbox.operators.readers.StringReader;
 import osp.leobert.android.magicbox.operators.writers.BooleanArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.BooleanWriter;
@@ -28,21 +33,27 @@ import osp.leobert.android.magicbox.operators.writers.ByteWriter;
 import osp.leobert.android.magicbox.operators.writers.CharArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.CharWriter;
 import osp.leobert.android.magicbox.operators.writers.DefaultWriter;
+import osp.leobert.android.magicbox.operators.writers.DoubleArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.DoubleWriter;
+import osp.leobert.android.magicbox.operators.writers.FloatArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.FloatWriter;
+import osp.leobert.android.magicbox.operators.writers.IntArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.IntWriter;
+import osp.leobert.android.magicbox.operators.writers.LongArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.LongWriter;
+import osp.leobert.android.magicbox.operators.writers.ParcelableArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.ParcelableWriter;
 import osp.leobert.android.magicbox.operators.writers.SerializableWriter;
 import osp.leobert.android.magicbox.operators.writers.ShortArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.ShortWriter;
 import osp.leobert.android.magicbox.operators.writers.SizeFWriter;
 import osp.leobert.android.magicbox.operators.writers.SizeWriter;
+import osp.leobert.android.magicbox.operators.writers.StringArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.StringWriter;
 import osp.leobert.android.magicbox.type.infer.InferType;
 import osp.leobert.android.magicbox.type.infer.impl.Implementation;
 import osp.leobert.android.magicbox.type.infer.impl.ImplementationArray;
-import osp.leobert.android.magicbox.type.infer.impl.PrimitiveOrItsBoxedTypeArray;
+import osp.leobert.android.magicbox.type.infer.impl.PrimitiveTypeArray;
 import osp.leobert.android.magicbox.type.infer.impl.PrimitiveType;
 import osp.leobert.android.magicbox.type.infer.impl.SimpleType;
 import osp.leobert.android.magicbox.type.infer.impl.SimpleTypeArray;
@@ -117,30 +128,47 @@ public enum Type {
             SerializableWriter.getInstance(),
             SerializableReader.getInstance()),
 
-    BooleanArray(new PrimitiveOrItsBoxedTypeArray(byte.class, java.lang.Byte.class),
+    BooleanArray(new PrimitiveTypeArray(boolean.class),
             BooleanArrayWriter.getInstance(),
             BooleanArrayReader.getInstance()),
 
-    ByteArray(new PrimitiveOrItsBoxedTypeArray(byte.class, java.lang.Byte.class),
+    ByteArray(new PrimitiveTypeArray(byte.class),
             ByteArrayWriter.getInstance(),
             ByteArrayReader.getInstance()),
 
-    CharArray(new PrimitiveOrItsBoxedTypeArray(char.class, Character.class),
+    CharArray(new PrimitiveTypeArray(char.class),
             CharArrayWriter.getInstance(),
             CharArrayReader.getInstance()),
 
-    ShortArray(new PrimitiveOrItsBoxedTypeArray(short.class, java.lang.Short.class),
+    ShortArray(new PrimitiveTypeArray(short.class),
             ShortArrayWriter.getInstance(),
             ShortArrayReader.getInstance()),
-    IntArray(new PrimitiveOrItsBoxedTypeArray(int.class, Integer.class)),
-    LongArray(new PrimitiveOrItsBoxedTypeArray(long.class, java.lang.Long.class)),
-    FloatArray(new PrimitiveOrItsBoxedTypeArray(float.class, java.lang.Float.class)),
-    DoubleArray(new PrimitiveOrItsBoxedTypeArray(double.class, java.lang.Double.class)),
+    IntArray(new PrimitiveTypeArray(int.class),
+            IntArrayWriter.getInstance(),
+            IntArrayReader.getInstance()),
 
-    StringArray(new SimpleTypeArray(java.lang.String.class)),
+    LongArray(new PrimitiveTypeArray(long.class),
+            LongArrayWriter.getInstance(),
+            LongArrayReader.getInstance()),
 
-    CharSequenceArray(new ImplementationArray(java.lang.CharSequence.class)),
-    ParcelableArray(new ImplementationArray(android.os.Parcelable.class)),
+    FloatArray(new PrimitiveTypeArray(float.class),
+            FloatArrayWriter.getInstance(),
+            FloatArrayReader.getInstance()),
+
+    DoubleArray(new PrimitiveTypeArray(double.class),
+            DoubleArrayWriter.getInstance(),
+            DoubleArrayReader.getInstance()),
+
+    StringArray(new SimpleTypeArray(java.lang.String.class),
+            StringArrayWriter.getInstance(),
+            StringArrayReader.getInstance()),
+
+    CharSequenceArray(new ImplementationArray(java.lang.CharSequence.class),
+            CharArrayWriter.getInstance(),
+            CharArrayReader.getInstance()),
+    ParcelableArray(new ImplementationArray(android.os.Parcelable.class),
+            ParcelableArrayWriter.getInstance(),
+            ParcelableArrayReader.getInstance()),
 
     SparseParcelableArray(new NegativeInfer()),
 
@@ -169,6 +197,10 @@ public enum Type {
         this.inferType = inferType;
         this.bundleWriter = bundleWriter;
         this.bundleReader = bundleReader;
+    }
+
+    public boolean canBeChecked() {
+        return !(inferType instanceof NegativeInfer);
     }
 
     public boolean check(Class clz) {

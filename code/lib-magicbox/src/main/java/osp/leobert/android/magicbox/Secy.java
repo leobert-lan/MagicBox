@@ -15,6 +15,8 @@ import osp.leobert.android.magicbox.model.StateField;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicbox.type.TypeInferUtils;
 
+import static osp.leobert.android.magicbox.log.ILogger.logger;
+
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox </p>
  * <p><b>Project:</b> code </p>
@@ -77,7 +79,7 @@ class Secy {
                     strategy.add(stateField);
             }
         }
-        strategies.put(objectClz.getName(),strategy);
+        strategies.put(objectClz.getName(), strategy);
         return strategy;
     }
 
@@ -102,6 +104,18 @@ class Secy {
 
         if (type == Type.Infer)
             type = TypeInferUtils.infer(field);
+        else {
+            if (!type.canBeChecked()) {
+                boolean isCorrectType = type.check(field.getType());
+                if (!isCorrectType) {
+                    logger.error("", "unCorrect Type set for" + fieldName);
+                    return new StateField(fieldName, field, bundleKey, Type.Infer);
+                }
+            } else {
+                logger.debug("", "you have notated " + fieldName + " as " + type.name() +
+                        ", one cannot be checked, with cautions");
+            }
+        }
 
         return new StateField(fieldName, field, bundleKey, type);
     }

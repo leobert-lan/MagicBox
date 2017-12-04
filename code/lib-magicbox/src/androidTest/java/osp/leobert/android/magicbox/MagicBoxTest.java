@@ -44,6 +44,9 @@ public class MagicBoxTest {
         @KeepState
         Boolean[] booleans2;
 
+        @KeepState(type = Type.Boolean)
+        Boolean[] booleans3;//an error type given
+
         public void foo() {
             testBool = false;
             testNullBoxBool = null;
@@ -68,6 +71,7 @@ public class MagicBoxTest {
     @Before
     public void setUp() throws Exception {
         magicBox = MagicBox.getInstance();
+        magicBox.setLogEnable(true);
         bundle = new Bundle();
         test1 = new TestClz();
         test1.foo();
