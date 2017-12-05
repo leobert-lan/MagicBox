@@ -251,48 +251,4 @@ public enum Type implements BoxIOComponent {
     public BundleReader getBundleReader() {
         return bundleReader;
     }
-
-    public static final class Custom implements BoxIOComponent {
-
-        private Custom() {
-            this(DefaultWriter.getInstance(), DefaultReader.getInstance());
-        }
-
-        private Custom(@NonNull BundleWriter bundleWriter, @NonNull BundleReader bundleReader) {
-            this.bundleWriter = bundleWriter;
-            this.bundleReader = bundleReader;
-        }
-
-        public static Custom newInstance() {
-            return new Custom();
-        }
-
-        public static Custom newInstance(@NonNull BundleWriter bundleWriter, @NonNull BundleReader bundleReader) {
-            return new Custom(bundleWriter, bundleReader);
-        }
-
-        private final BundleWriter bundleWriter;
-
-        private final BundleReader bundleReader;
-
-        @Override
-        public BundleWriter getBundleWriter() {
-            return this.bundleWriter;
-        }
-
-        @Override
-        public BundleReader getBundleReader() {
-            return this.bundleReader;
-        }
-
-        @Override
-        public boolean canBeChecked() {
-            return true;
-        }
-
-        @Override
-        public boolean check(Class clz) {
-            return true;
-        }
-    }
 }
