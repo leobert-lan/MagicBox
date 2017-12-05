@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -17,7 +17,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  */
 
 @SuppressWarnings("unchecked")
-public class CharSequenceArrayListWriter implements BundleWriter {
+public class CharSequenceArrayListWriter implements BoxWriter {
     private static CharSequenceArrayListWriter instance = null;
 
     private CharSequenceArrayListWriter() {

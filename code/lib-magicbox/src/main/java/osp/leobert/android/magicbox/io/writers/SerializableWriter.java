@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -16,7 +16,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/12/4.
  */
 
-public class SerializableWriter implements BundleWriter {
+public class SerializableWriter implements BoxWriter {
     private static SerializableWriter instance = null;
 
     private SerializableWriter() {

@@ -3,8 +3,8 @@ package osp.leobert.android.magicboxsample;
 import android.support.annotation.NonNull;
 
 import osp.leobert.android.magicbox.BoxIOComponent;
-import osp.leobert.android.magicbox.io.BundleReader;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample </p>
@@ -17,13 +17,13 @@ import osp.leobert.android.magicbox.io.BundleWriter;
 public class GsonBoxIOComponent implements BoxIOComponent {
     @NonNull
     @Override
-    public BundleWriter getBundleWriter() {
+    public BoxWriter getBoxWriter() {
         return CustomBoxWriter.getInstance();
     }
 
     @NonNull
     @Override
-    public BundleReader getBundleReader() {
+    public BoxReader getBoxReader() {
         return CustomBoxReader.getInstance();
     }
 }

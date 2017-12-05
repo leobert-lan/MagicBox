@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -15,7 +15,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/12/4.
  */
 
-public class StringArrayWriter implements BundleWriter {
+public class StringArrayWriter implements BoxWriter {
     private static StringArrayWriter instance = null;
 
     private StringArrayWriter() {

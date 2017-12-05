@@ -2,8 +2,8 @@ package osp.leobert.android.magicbox.type;
 
 
 import osp.leobert.android.magicbox.BoxIOComponent;
-import osp.leobert.android.magicbox.io.BundleReader;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.io.readers.BooleanArrayReader;
 import osp.leobert.android.magicbox.io.readers.BooleanReader;
 import osp.leobert.android.magicbox.io.readers.ByteArrayReader;
@@ -216,14 +216,14 @@ public enum Type implements BoxIOComponent, ITypeCheck {
 
     private final InferType inferType;
 
-    private final BundleWriter bundleWriter;
+    private final BoxWriter boxWriter;
 
-    private final BundleReader bundleReader;
+    private final BoxReader boxReader;
 
-    Type(InferType inferType, BundleWriter bundleWriter, BundleReader bundleReader) {
+    Type(InferType inferType, BoxWriter boxWriter, BoxReader boxReader) {
         this.inferType = inferType;
-        this.bundleWriter = bundleWriter;
-        this.bundleReader = bundleReader;
+        this.boxWriter = boxWriter;
+        this.boxReader = boxReader;
     }
 
     @Override
@@ -240,12 +240,12 @@ public enum Type implements BoxIOComponent, ITypeCheck {
     }
 
     @Override
-    public BundleWriter getBundleWriter() {
-        return bundleWriter;
+    public BoxWriter getBoxWriter() {
+        return boxWriter;
     }
 
     @Override
-    public BundleReader getBundleReader() {
-        return bundleReader;
+    public BoxReader getBoxReader() {
+        return boxReader;
     }
 }

@@ -8,11 +8,11 @@ import osp.leobert.android.magicbox.model.StateField;
 /**
  * <p><b>Package:</b> osp.leobert.android.savedstate.io </p>
  * <p><b>Project:</b> MyJava </p>
- * <p><b>Classname:</b> BundleWriter </p>
+ * <p><b>Classname:</b> BundleReader </p>
  * <p><b>Description:</b> TODO </p>
  * Created by leobert on 2017/11/15.
  */
 
-public interface BundleWriter {
-    void write(Bundle bundle, Object to, StateField field) throws IllegalAccessException;
+public interface BoxReader {
+    void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException;
 }

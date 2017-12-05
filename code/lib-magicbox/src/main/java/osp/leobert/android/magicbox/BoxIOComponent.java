@@ -2,8 +2,8 @@ package osp.leobert.android.magicbox;
 
 import android.support.annotation.NonNull;
 
-import osp.leobert.android.magicbox.io.BundleReader;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.io.readers.DefaultReader;
 import osp.leobert.android.magicbox.io.writers.DefaultWriter;
 
@@ -17,8 +17,10 @@ import osp.leobert.android.magicbox.io.writers.DefaultWriter;
 
 public interface BoxIOComponent {
 
-    @NonNull BundleWriter getBundleWriter();
-    @NonNull BundleReader getBundleReader();
+    @NonNull
+    BoxWriter getBoxWriter();
+    @NonNull
+    BoxReader getBoxReader();
 
     class DefaultComponent implements BoxIOComponent {
         public DefaultComponent() {
@@ -26,13 +28,13 @@ public interface BoxIOComponent {
 
         @NonNull
         @Override
-        public BundleWriter getBundleWriter() {
+        public BoxWriter getBoxWriter() {
             return DefaultWriter.getInstance();
         }
 
         @NonNull
         @Override
-        public BundleReader getBundleReader() {
+        public BoxReader getBoxReader() {
             return DefaultReader.getInstance();
         }
     }

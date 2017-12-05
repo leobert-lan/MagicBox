@@ -5,8 +5,8 @@ import android.os.Parcelable;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -16,7 +16,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/12/4.
  */
 
-public class ParcelableWriter implements BundleWriter {
+public class ParcelableWriter implements BoxWriter {
     private static ParcelableWriter instance = null;
 
     private ParcelableWriter() {

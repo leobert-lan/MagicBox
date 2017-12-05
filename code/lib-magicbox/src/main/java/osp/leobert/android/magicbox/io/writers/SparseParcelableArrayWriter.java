@@ -6,8 +6,8 @@ import android.util.SparseArray;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -17,7 +17,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/12/5.
  */
 @SuppressWarnings({"unchecked","rawtypes"})
-public class SparseParcelableArrayWriter implements BundleWriter {
+public class SparseParcelableArrayWriter implements BoxWriter {
     private static SparseParcelableArrayWriter instance = null;
 
     private SparseParcelableArrayWriter() {

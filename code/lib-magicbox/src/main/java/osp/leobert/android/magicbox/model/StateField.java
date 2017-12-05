@@ -7,8 +7,8 @@ import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.BoxIOComponent;
 import osp.leobert.android.magicbox.MException;
-import osp.leobert.android.magicbox.io.BundleReader;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 
 /**
@@ -68,7 +68,7 @@ public class StateField {
     }
 
     public void save(@NonNull Object object, @NonNull Bundle bundle) {
-        BundleWriter writer = getIoComponent().getBundleWriter();
+        BoxWriter writer = getIoComponent().getBoxWriter();
         // TODO: 2017/12/4  check null
         try {
             writer.write(bundle, object, this);
@@ -80,7 +80,7 @@ public class StateField {
 
 
     public void restore(@NonNull Object object, @NonNull Bundle bundle) {
-        BundleReader reader = getIoComponent().getBundleReader();
+        BoxReader reader = getIoComponent().getBoxReader();
         // TODO: 2017/12/4  check null
         try {
             reader.read(bundle, object, this);

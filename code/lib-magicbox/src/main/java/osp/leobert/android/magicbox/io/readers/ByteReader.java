@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleReader;
+import osp.leobert.android.magicbox.io.BoxReader;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
@@ -15,14 +15,14 @@ import osp.leobert.android.magicbox.io.BundleReader;
  * Created by leobert on 2017/12/1.
  */
 
-public class ByteReader implements BundleReader {
-    private static BundleReader instance = null;
+public class ByteReader implements BoxReader {
+    private static BoxReader instance = null;
 
     private ByteReader() {
         // single
     }
 
-    public static BundleReader getInstance() {
+    public static BoxReader getInstance() {
         if (instance == null)
             instance = new ByteReader();
         return instance;

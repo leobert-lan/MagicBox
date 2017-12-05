@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -15,7 +15,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/12/3.
  */
 
-public class LongWriter implements BundleWriter {
+public class LongWriter implements BoxWriter {
     private static LongWriter instance = null;
 
     private LongWriter() {

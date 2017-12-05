@@ -5,7 +5,7 @@ import android.os.Bundle;
 import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 
 /**
@@ -16,15 +16,15 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/11/15.
  */
 
-public class BooleanWriter implements BundleWriter {
+public class BooleanWriter implements BoxWriter {
 
-    private static BundleWriter instance = null;
+    private static BoxWriter instance = null;
 
     private BooleanWriter() {
         // single
     }
 
-    public static BundleWriter getInstance() {
+    public static BoxWriter getInstance() {
         if (instance == null)
             instance = new BooleanWriter();
         return instance;

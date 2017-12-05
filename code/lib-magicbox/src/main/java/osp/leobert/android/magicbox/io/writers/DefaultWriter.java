@@ -3,7 +3,7 @@ package osp.leobert.android.magicbox.io.writers;
 import android.os.Bundle;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.BoxWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -13,7 +13,7 @@ import osp.leobert.android.magicbox.io.BundleWriter;
  * Created by leobert on 2017/12/4.
  */
 
-public class DefaultWriter implements BundleWriter {
+public class DefaultWriter implements BoxWriter {
     private static DefaultWriter instance = null;
 
     private DefaultWriter() {

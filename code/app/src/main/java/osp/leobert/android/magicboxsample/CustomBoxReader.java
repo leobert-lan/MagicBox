@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BundleReader;
+import osp.leobert.android.magicbox.io.BoxReader;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample </p>
@@ -17,7 +17,7 @@ import osp.leobert.android.magicbox.io.BundleReader;
  * Created by leobert on 2017/12/5.
  */
 
-public class CustomBoxReader implements BundleReader {
+public class CustomBoxReader implements BoxReader {
     private static CustomBoxReader instance = null;
 
     private CustomBoxReader() {
