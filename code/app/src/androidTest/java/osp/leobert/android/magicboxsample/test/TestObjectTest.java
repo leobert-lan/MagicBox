@@ -3,18 +3,17 @@ package osp.leobert.android.magicboxsample.test;
 import android.os.Bundle;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
 import osp.leobert.android.magicbox.MagicBox;
-import osp.leobert.android.magicbox.annotations.BoxIO;
 import osp.leobert.android.magicbox.annotations.KeepState;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicboxsample.GsonBoxIOComponent;
-
-import static org.junit.Assert.*;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test </p>
@@ -28,11 +27,11 @@ public class TestObjectTest {
 
 
     private static class Wrapper {
-        @KeepState(type = Type.Object,
-                io = @BoxIO(component = GsonBoxIOComponent.class))
+        @KeepState(type = Type.Object,io = GsonBoxIOComponent.class)
         TestObject testObject;
 
         public void foo() {
+            testObject = new TestObject();
             testObject.setStrs(Arrays.asList("a", "b"));
             testObject.setName(new TestObject.Name("Lily", "Allen"));
         }
@@ -59,11 +58,12 @@ public class TestObjectTest {
 
     }
 
+    @Test
     public void testRestore() {
         wrapper2 = new Wrapper();
         magicBox.restoreInstanceState(wrapper2,bundle);
         System.out.println(wrapper2);
-
+        Assert.assertTrue(true);
 
 
     }

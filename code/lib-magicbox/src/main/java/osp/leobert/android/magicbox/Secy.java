@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -105,12 +106,13 @@ class Secy {
         if (type == Type.Infer)
             type = TypeInferUtils.infer(field);
         else if (type == Type.Object) {
-
-
-
-        }
-
-        else {
+            try {
+                return analyseCustoms(field, keepStateNotation);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                e.printStackTrace();
+                throw new MException(e.getMessage());
+            }
+        } else {
             if (!type.canBeChecked()) {
                 boolean isCorrectType = type.check(field.getType());
                 if (!isCorrectType) {
@@ -124,5 +126,14 @@ class Secy {
         }
 
         return new StateField(fieldName, field, bundleKey, type);
+    }
+
+    private StateField analyseCustoms(Field field, KeepState keepStateNotation) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        String fieldName = field.getName();
+        String bundleKey = "key_" + fieldName;
+        Class<? extends BoxIOComponent> clz = keepStateNotation.io();
+        BoxIOComponent ioComponent = clz.getConstructor().newInstance();
+
+        return new StateField(fieldName, field, bundleKey, ioComponent);
     }
 }

@@ -5,10 +5,10 @@ import android.support.annotation.NonNull;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.BoxIOComponent;
 import osp.leobert.android.magicbox.MException;
 import osp.leobert.android.magicbox.io.BundleReader;
 import osp.leobert.android.magicbox.io.BundleWriter;
-import osp.leobert.android.magicbox.type.Type;
 
 
 /**
@@ -20,27 +20,27 @@ import osp.leobert.android.magicbox.type.Type;
  */
 
 public class StateField {
-    private Type type;
-    private String bundleKey;
     private String propertyName;
     private Field field;
+    private String bundleKey;
+    private BoxIOComponent ioComponent;
 
     public StateField() {
     }
 
-    public StateField(String propertyName, Field field, String bundleKey, Type type) {
-        this.type = type;
+    public StateField(String propertyName, Field field, String bundleKey, BoxIOComponent ioComponent) {
+        this.ioComponent = ioComponent;
         this.bundleKey = bundleKey;
         this.propertyName = propertyName;
         this.field = field;
     }
 
-    public Type getType() {
-        return type;
+    public BoxIOComponent getIoComponent() {
+        return ioComponent;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setIoComponent(BoxIOComponent ioComponent) {
+        this.ioComponent = ioComponent;
     }
 
     public String getBundleKey() {
@@ -68,7 +68,7 @@ public class StateField {
     }
 
     public void save(@NonNull Object object, @NonNull Bundle bundle) {
-        BundleWriter writer = getType().getBundleWriter();
+        BundleWriter writer = getIoComponent().getBundleWriter();
         // TODO: 2017/12/4  check null
         try {
             writer.write(bundle, object, this);
@@ -80,7 +80,7 @@ public class StateField {
 
 
     public void restore(@NonNull Object object, @NonNull Bundle bundle) {
-        BundleReader reader = getType().getBundleReader();
+        BundleReader reader = getIoComponent().getBundleReader();
         // TODO: 2017/12/4  check null
         try {
             reader.read(bundle, object, this);

@@ -17,6 +17,7 @@ import osp.leobert.android.magicbox.BoxIOComponent;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
+@Deprecated
 public @interface BoxIO {
     /**
      * @return a class implement {@link BoxIOComponent} with a public empty constructor
