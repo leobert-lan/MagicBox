@@ -15,16 +15,16 @@ import osp.leobert.android.magicbox.operators.BundleReader;
  * Created by leobert on 2017/12/1.
  */
 
-public class CharSequenceArrayList implements BundleReader {
-    private static CharSequenceArrayList instance = null;
+public class CharSequenceArrayListReader implements BundleReader {
+    private static CharSequenceArrayListReader instance = null;
 
-    private CharSequenceArrayList() {
+    private CharSequenceArrayListReader() {
         // single
     }
 
-    public static CharSequenceArrayList getInstance() {
+    public static CharSequenceArrayListReader getInstance() {
         if (instance == null)
-            instance = new CharSequenceArrayList();
+            instance = new CharSequenceArrayListReader();
         return instance;
     }
 

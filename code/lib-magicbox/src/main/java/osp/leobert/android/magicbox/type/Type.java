@@ -1,6 +1,10 @@
 package osp.leobert.android.magicbox.type;
 
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+
+import osp.leobert.android.magicbox.BoxIOComponent;
 import osp.leobert.android.magicbox.operators.BundleReader;
 import osp.leobert.android.magicbox.operators.BundleWriter;
 import osp.leobert.android.magicbox.operators.readers.BooleanArrayReader;
@@ -9,14 +13,17 @@ import osp.leobert.android.magicbox.operators.readers.ByteArrayReader;
 import osp.leobert.android.magicbox.operators.readers.ByteReader;
 import osp.leobert.android.magicbox.operators.readers.CharArrayReader;
 import osp.leobert.android.magicbox.operators.readers.CharReader;
+import osp.leobert.android.magicbox.operators.readers.CharSequenceArrayListReader;
 import osp.leobert.android.magicbox.operators.readers.DefaultReader;
 import osp.leobert.android.magicbox.operators.readers.DoubleArrayReader;
 import osp.leobert.android.magicbox.operators.readers.FloatArrayReader;
 import osp.leobert.android.magicbox.operators.readers.FloatReader;
 import osp.leobert.android.magicbox.operators.readers.IntArrayReader;
 import osp.leobert.android.magicbox.operators.readers.IntReader;
+import osp.leobert.android.magicbox.operators.readers.IntegerArrayListReader;
 import osp.leobert.android.magicbox.operators.readers.LongArrayReader;
 import osp.leobert.android.magicbox.operators.readers.LongReader;
+import osp.leobert.android.magicbox.operators.readers.ParcelableArrayListReader;
 import osp.leobert.android.magicbox.operators.readers.ParcelableArrayReader;
 import osp.leobert.android.magicbox.operators.readers.ParcelableReader;
 import osp.leobert.android.magicbox.operators.readers.SerializableReader;
@@ -24,6 +31,8 @@ import osp.leobert.android.magicbox.operators.readers.ShortArrayReader;
 import osp.leobert.android.magicbox.operators.readers.ShortReader;
 import osp.leobert.android.magicbox.operators.readers.SizeFReader;
 import osp.leobert.android.magicbox.operators.readers.SizeReader;
+import osp.leobert.android.magicbox.operators.readers.SparseParcelableArrayReader;
+import osp.leobert.android.magicbox.operators.readers.StringArrayListReader;
 import osp.leobert.android.magicbox.operators.readers.StringArrayReader;
 import osp.leobert.android.magicbox.operators.readers.StringReader;
 import osp.leobert.android.magicbox.operators.writers.BooleanArrayWriter;
@@ -31,6 +40,7 @@ import osp.leobert.android.magicbox.operators.writers.BooleanWriter;
 import osp.leobert.android.magicbox.operators.writers.ByteArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.ByteWriter;
 import osp.leobert.android.magicbox.operators.writers.CharArrayWriter;
+import osp.leobert.android.magicbox.operators.writers.CharSequenceArrayListWriter;
 import osp.leobert.android.magicbox.operators.writers.CharWriter;
 import osp.leobert.android.magicbox.operators.writers.DefaultWriter;
 import osp.leobert.android.magicbox.operators.writers.DoubleArrayWriter;
@@ -39,8 +49,10 @@ import osp.leobert.android.magicbox.operators.writers.FloatArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.FloatWriter;
 import osp.leobert.android.magicbox.operators.writers.IntArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.IntWriter;
+import osp.leobert.android.magicbox.operators.writers.IntegerArrayListWriter;
 import osp.leobert.android.magicbox.operators.writers.LongArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.LongWriter;
+import osp.leobert.android.magicbox.operators.writers.ParcelableArrayListWriter;
 import osp.leobert.android.magicbox.operators.writers.ParcelableArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.ParcelableWriter;
 import osp.leobert.android.magicbox.operators.writers.SerializableWriter;
@@ -48,6 +60,8 @@ import osp.leobert.android.magicbox.operators.writers.ShortArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.ShortWriter;
 import osp.leobert.android.magicbox.operators.writers.SizeFWriter;
 import osp.leobert.android.magicbox.operators.writers.SizeWriter;
+import osp.leobert.android.magicbox.operators.writers.SparseParcelableArrayWriter;
+import osp.leobert.android.magicbox.operators.writers.StringArrayListWriter;
 import osp.leobert.android.magicbox.operators.writers.StringArrayWriter;
 import osp.leobert.android.magicbox.operators.writers.StringWriter;
 import osp.leobert.android.magicbox.type.infer.InferType;
@@ -67,7 +81,7 @@ import osp.leobert.android.magicbox.type.infer.impl.NegativeInfer;
  * Created by leobert on 2017/11/15.
  */
 
-public enum Type {
+public enum Type implements BoxIOComponent {
     Infer(new NegativeInfer(),
             DefaultWriter.getInstance(),
             DefaultReader.getInstance()),
@@ -170,28 +184,44 @@ public enum Type {
             ParcelableArrayWriter.getInstance(),
             ParcelableArrayReader.getInstance()),
 
-    SparseParcelableArray(new NegativeInfer()),
+    SparseParcelableArray(new NegativeInfer(),
+            SparseParcelableArrayWriter.getInstance(),
+            SparseParcelableArrayReader.getInstance()),
 
-    ParcelableArrayList(new NegativeInfer()),
-    IntegerArrayList(new NegativeInfer()),
-    StringArrayList(new NegativeInfer()),
-    CharSequenceArrayList(new NegativeInfer()),
+    ParcelableArrayList(new NegativeInfer(),
+            ParcelableArrayListWriter.getInstance(),
+            ParcelableArrayListReader.getInstance()),
 
-    Null,
-    Object;
+    IntegerArrayList(new NegativeInfer(),
+            IntegerArrayListWriter.getInstance(),
+            IntegerArrayListReader.getInstance()),
 
-    private InferType inferType;
+    StringArrayList(new NegativeInfer(),
+            StringArrayListWriter.getInstance(),
+            StringArrayListReader.getInstance()),
 
-    private BundleWriter bundleWriter;
+    CharSequenceArrayList(new NegativeInfer(),
+            CharSequenceArrayListWriter.getInstance(),
+            CharSequenceArrayListReader.getInstance()),
 
-    private BundleReader bundleReader;
+    Null(new NegativeInfer(),
+            DefaultWriter.getInstance(),
+            DefaultReader.getInstance()),
 
-    Type() {
-    }
+    Object(new InferType() {
+        @Override
+        public boolean infer(Class<?> clz) {
+            return true;
+        }
+    }, DefaultWriter.getInstance(),
+            DefaultReader.getInstance());
 
-    Type(InferType inferType) {
-        this.inferType = inferType;
-    }
+
+    private final InferType inferType;
+
+    private final BundleWriter bundleWriter;
+
+    private final BundleReader bundleReader;
 
     Type(InferType inferType, BundleWriter bundleWriter, BundleReader bundleReader) {
         this.inferType = inferType;
@@ -199,10 +229,12 @@ public enum Type {
         this.bundleReader = bundleReader;
     }
 
+    @Override
     public boolean canBeChecked() {
         return !(inferType instanceof NegativeInfer);
     }
 
+    @Override
     public boolean check(Class clz) {
         if (clz == null)
             return Null.equals(this);
@@ -210,11 +242,57 @@ public enum Type {
         return inferType.infer(clz);
     }
 
+    @Override
     public BundleWriter getBundleWriter() {
         return bundleWriter;
     }
 
+    @Override
     public BundleReader getBundleReader() {
         return bundleReader;
+    }
+
+    public static final class Custom implements BoxIOComponent {
+
+        private Custom() {
+            this(DefaultWriter.getInstance(), DefaultReader.getInstance());
+        }
+
+        private Custom(@NonNull BundleWriter bundleWriter, @NonNull BundleReader bundleReader) {
+            this.bundleWriter = bundleWriter;
+            this.bundleReader = bundleReader;
+        }
+
+        public static Custom newInstance() {
+            return new Custom();
+        }
+
+        public static Custom newInstance(@NonNull BundleWriter bundleWriter, @NonNull BundleReader bundleReader) {
+            return new Custom(bundleWriter, bundleReader);
+        }
+
+        private final BundleWriter bundleWriter;
+
+        private final BundleReader bundleReader;
+
+        @Override
+        public BundleWriter getBundleWriter() {
+            return this.bundleWriter;
+        }
+
+        @Override
+        public BundleReader getBundleReader() {
+            return this.bundleReader;
+        }
+
+        @Override
+        public boolean canBeChecked() {
+            return true;
+        }
+
+        @Override
+        public boolean check(Class clz) {
+            return true;
+        }
     }
 }

@@ -19,6 +19,7 @@ import osp.leobert.android.magicbox.type.Type;
  */
 @RunWith(AndroidJUnit4.class)
 public class MagicBoxTest {
+
     private static class TestClz {
 
         @KeepState
@@ -46,6 +47,10 @@ public class MagicBoxTest {
 
         @KeepState(type = Type.Boolean)
         Boolean[] booleans3;//an error type given
+
+        @KeepState(type = Type.Object)
+        Object custom;
+
 
         public void foo() {
             testBool = false;

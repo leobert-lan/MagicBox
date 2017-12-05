@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import osp.leobert.android.magicbox.BoxIOComponent;
+import osp.leobert.android.magicbox.operators.BundleWriter;
 import osp.leobert.android.magicbox.type.Type;
 
 /**
@@ -19,4 +21,5 @@ import osp.leobert.android.magicbox.type.Type;
 @Target(ElementType.FIELD)
 public @interface KeepState {
     Type type() default Type.Infer;
+
 }
