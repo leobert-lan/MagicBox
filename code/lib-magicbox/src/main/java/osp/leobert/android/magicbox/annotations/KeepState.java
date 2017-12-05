@@ -5,10 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import osp.leobert.android.magicbox.BoxIOComponent;
-import osp.leobert.android.magicbox.operators.BundleWriter;
-import osp.leobert.android.magicbox.operators.readers.DefaultReader;
-import osp.leobert.android.magicbox.operators.writers.DefaultWriter;
 import osp.leobert.android.magicbox.type.Type;
 
 /**

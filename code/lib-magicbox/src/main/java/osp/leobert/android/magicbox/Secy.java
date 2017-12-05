@@ -104,6 +104,12 @@ class Secy {
 
         if (type == Type.Infer)
             type = TypeInferUtils.infer(field);
+        else if (type == Type.Object) {
+
+
+
+        }
+
         else {
             if (!type.canBeChecked()) {
                 boolean isCorrectType = type.check(field.getType());

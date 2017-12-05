@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.MException;
-import osp.leobert.android.magicbox.operators.BundleReader;
-import osp.leobert.android.magicbox.operators.BundleWriter;
+import osp.leobert.android.magicbox.io.BundleReader;
+import osp.leobert.android.magicbox.io.BundleWriter;
 import osp.leobert.android.magicbox.type.Type;
 
 

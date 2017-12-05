@@ -2,10 +2,10 @@ package osp.leobert.android.magicbox;
 
 import android.support.annotation.NonNull;
 
-import osp.leobert.android.magicbox.operators.BundleReader;
-import osp.leobert.android.magicbox.operators.BundleWriter;
-import osp.leobert.android.magicbox.operators.readers.DefaultReader;
-import osp.leobert.android.magicbox.operators.writers.DefaultWriter;
+import osp.leobert.android.magicbox.io.BundleReader;
+import osp.leobert.android.magicbox.io.BundleWriter;
+import osp.leobert.android.magicbox.io.readers.DefaultReader;
+import osp.leobert.android.magicbox.io.writers.DefaultWriter;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox </p>
