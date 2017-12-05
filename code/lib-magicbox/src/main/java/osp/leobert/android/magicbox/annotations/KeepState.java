@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 import osp.leobert.android.magicbox.BoxIOComponent;
 import osp.leobert.android.magicbox.operators.BundleWriter;
+import osp.leobert.android.magicbox.operators.readers.DefaultReader;
+import osp.leobert.android.magicbox.operators.writers.DefaultWriter;
 import osp.leobert.android.magicbox.type.Type;
 
 /**
@@ -20,6 +22,8 @@ import osp.leobert.android.magicbox.type.Type;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface KeepState {
+
     Type type() default Type.Infer;
 
+    BoxIO io() default @BoxIO();
 }

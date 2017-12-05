@@ -1,9 +1,6 @@
 package osp.leobert.android.magicbox.type;
 
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-
 import osp.leobert.android.magicbox.BoxIOComponent;
 import osp.leobert.android.magicbox.operators.BundleReader;
 import osp.leobert.android.magicbox.operators.BundleWriter;
@@ -67,11 +64,11 @@ import osp.leobert.android.magicbox.operators.writers.StringWriter;
 import osp.leobert.android.magicbox.type.infer.InferType;
 import osp.leobert.android.magicbox.type.infer.impl.Implementation;
 import osp.leobert.android.magicbox.type.infer.impl.ImplementationArray;
-import osp.leobert.android.magicbox.type.infer.impl.PrimitiveTypeArray;
+import osp.leobert.android.magicbox.type.infer.impl.NegativeInfer;
 import osp.leobert.android.magicbox.type.infer.impl.PrimitiveType;
+import osp.leobert.android.magicbox.type.infer.impl.PrimitiveTypeArray;
 import osp.leobert.android.magicbox.type.infer.impl.SimpleType;
 import osp.leobert.android.magicbox.type.infer.impl.SimpleTypeArray;
-import osp.leobert.android.magicbox.type.infer.impl.NegativeInfer;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.savedstate.type </p>
@@ -81,7 +78,7 @@ import osp.leobert.android.magicbox.type.infer.impl.NegativeInfer;
  * Created by leobert on 2017/11/15.
  */
 
-public enum Type implements BoxIOComponent {
+public enum Type implements BoxIOComponent, ITypeCheck {
     Infer(new NegativeInfer(),
             DefaultWriter.getInstance(),
             DefaultReader.getInstance()),

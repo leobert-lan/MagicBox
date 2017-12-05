@@ -1,4 +1,4 @@
-package osp.leobert.android.magicbox;
+package osp.leobert.android.magicbox.type;
 
 import osp.leobert.android.magicbox.type.infer.impl.NegativeInfer;
 

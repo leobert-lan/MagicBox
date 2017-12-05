@@ -15,5 +15,4 @@ import osp.leobert.android.magicbox.model.StateField;
 
 public interface BundleWriter {
     void write(Bundle bundle, Object to, StateField field) throws IllegalAccessException;
-
 }
