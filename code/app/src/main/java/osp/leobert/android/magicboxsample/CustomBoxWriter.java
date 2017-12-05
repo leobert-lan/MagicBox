@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.io.BaseCustomBoxWriter;
 import osp.leobert.android.magicbox.model.StateField;
 import osp.leobert.android.magicbox.io.BoxWriter;
 
@@ -17,7 +18,7 @@ import osp.leobert.android.magicbox.io.BoxWriter;
  * Created by leobert on 2017/12/5.
  */
 
-public class CustomBoxWriter implements BoxWriter {
+public class CustomBoxWriter extends BaseCustomBoxWriter {
     private static CustomBoxWriter instance = null;
 
     private CustomBoxWriter() {
@@ -31,13 +32,10 @@ public class CustomBoxWriter implements BoxWriter {
     }
 
     @Override
-    public void write(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-
+    protected void parseAndSave(Bundle bundle, String bundleKey, Object o) {
         Gson gson = new Gson();
-        String _s = gson.toJson(propertyField.get(to));
+        String _s = gson.toJson(o);
 
-        bundle.putString(field.getBundleKey(), _s);
+        bundle.putString(bundleKey, _s);
     }
 }

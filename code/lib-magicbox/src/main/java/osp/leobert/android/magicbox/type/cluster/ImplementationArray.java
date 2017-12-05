@@ -1,17 +1,17 @@
-package osp.leobert.android.magicbox.type.infer.impl;
+package osp.leobert.android.magicbox.type.cluster;
 
 
-import osp.leobert.android.magicbox.type.infer.InferType;
+import osp.leobert.android.magicbox.type.SupposeType;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.savedstate.type.infer.impl </p>
+ * <p><b>Package:</b> osp.leobert.android.savedstate.type.cluster </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> ImplementationArray </p>
  * <p><b>Description:</b> TODO </p>
  * Created by leobert on 2017/11/19.
  */
 
-public class ImplementationArray implements InferType {
+public class ImplementationArray implements SupposeType {
     private final Class<?> typeInterface;
 
     public ImplementationArray(Class<?> typeInterface) {
@@ -21,12 +21,17 @@ public class ImplementationArray implements InferType {
     }
 
     @Override
-    public boolean infer(Class<?> clz) {
+    public boolean check(Class<?> clz) {
         if (clz == null)
             return false;
         if (!clz.isArray())
             return false;
         Class cc = clz.getComponentType();
         return typeInterface.isAssignableFrom(cc);
+    }
+
+    @Override
+    public boolean canBeChecked() {
+        return true;
     }
 }

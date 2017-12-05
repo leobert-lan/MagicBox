@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import osp.leobert.android.magicbox.BoxIOComponent;
+import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.type.Type;
 
 /**

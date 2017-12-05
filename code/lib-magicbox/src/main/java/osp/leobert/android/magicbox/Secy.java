@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.model.StateField;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicbox.type.TypeInferUtils;
@@ -22,11 +23,11 @@ import static osp.leobert.android.magicbox.log.ILogger.logger;
  * <p><b>Package:</b> osp.leobert.android.magicbox </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> Secy </p>
- * <p><b>Description:</b> TODO </p>
+ * <p><b>Description:</b> works as a secy </p>
  * Created by leobert on 2017/12/4.
  */
 
-class Secy {
+final class Secy {
     private static Secy instance = null;
 
     private Map<String, List<StateField>> strategies;
@@ -65,9 +66,7 @@ class Secy {
         return genStrategy(objectClz);
     }
 
-
-    // TODO: 2017/12/4 change to private
-    List<StateField> genStrategy(@NonNull Class objectClz) {
+    private List<StateField> genStrategy(@NonNull Class objectClz) {
         List<StateField> strategy = new ArrayList<>();
 
         List<Field> list = Arrays.asList(objectClz.getDeclaredFields());

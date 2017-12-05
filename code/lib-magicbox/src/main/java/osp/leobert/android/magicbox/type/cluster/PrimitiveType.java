@@ -1,7 +1,7 @@
-package osp.leobert.android.magicbox.type.infer.impl;
+package osp.leobert.android.magicbox.type.cluster;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.type.infer.impl </p>
+ * <p><b>Package:</b> osp.leobert.android.magicbox.type.cluster </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> PrimitiveType </p>
  * <p><b>Description:</b> TODO </p>

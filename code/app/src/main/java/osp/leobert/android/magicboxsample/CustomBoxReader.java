@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.io.BaseCustomBoxReader;
 import osp.leobert.android.magicbox.model.StateField;
 import osp.leobert.android.magicbox.io.BoxReader;
 
@@ -17,7 +18,7 @@ import osp.leobert.android.magicbox.io.BoxReader;
  * Created by leobert on 2017/12/5.
  */
 
-public class CustomBoxReader implements BoxReader {
+public class CustomBoxReader extends BaseCustomBoxReader {
     private static CustomBoxReader instance = null;
 
     private CustomBoxReader() {
@@ -31,14 +32,10 @@ public class CustomBoxReader implements BoxReader {
     }
 
     @Override
-    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-
-        String s = bundle.getString(field.getBundleKey());
+    protected Object fetchAndParse(Bundle bundle, String bundleKey, Class<?> type) {
+        String s = bundle.getString(bundleKey);
         Gson gson = new Gson();
 
-        propertyField.set(to,gson.fromJson(s,propertyField.getType()));
-
+        return gson.fromJson(s,type);
     }
 }

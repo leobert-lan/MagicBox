@@ -1,7 +1,7 @@
 package osp.leobert.android.magicbox.type;
 
 
-import osp.leobert.android.magicbox.BoxIOComponent;
+import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.io.BoxReader;
 import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.io.readers.BooleanArrayReader;
@@ -61,14 +61,13 @@ import osp.leobert.android.magicbox.io.writers.SparseParcelableArrayWriter;
 import osp.leobert.android.magicbox.io.writers.StringArrayListWriter;
 import osp.leobert.android.magicbox.io.writers.StringArrayWriter;
 import osp.leobert.android.magicbox.io.writers.StringWriter;
-import osp.leobert.android.magicbox.type.infer.InferType;
-import osp.leobert.android.magicbox.type.infer.impl.Implementation;
-import osp.leobert.android.magicbox.type.infer.impl.ImplementationArray;
-import osp.leobert.android.magicbox.type.infer.impl.NegativeInfer;
-import osp.leobert.android.magicbox.type.infer.impl.PrimitiveType;
-import osp.leobert.android.magicbox.type.infer.impl.PrimitiveTypeArray;
-import osp.leobert.android.magicbox.type.infer.impl.SimpleType;
-import osp.leobert.android.magicbox.type.infer.impl.SimpleTypeArray;
+import osp.leobert.android.magicbox.type.cluster.Implementation;
+import osp.leobert.android.magicbox.type.cluster.ImplementationArray;
+import osp.leobert.android.magicbox.type.cluster.NegativeInfer;
+import osp.leobert.android.magicbox.type.cluster.PrimitiveType;
+import osp.leobert.android.magicbox.type.cluster.PrimitiveTypeArray;
+import osp.leobert.android.magicbox.type.cluster.SimpleType;
+import osp.leobert.android.magicbox.type.cluster.SimpleTypeArray;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.savedstate.type </p>
@@ -78,7 +77,7 @@ import osp.leobert.android.magicbox.type.infer.impl.SimpleTypeArray;
  * Created by leobert on 2017/11/15.
  */
 
-public enum Type implements BoxIOComponent, ITypeCheck {
+public enum Type implements BoxIOComponent, SupposeType {
     Infer(new NegativeInfer(),
             DefaultWriter.getInstance(),
             DefaultReader.getInstance()),
@@ -205,30 +204,36 @@ public enum Type implements BoxIOComponent, ITypeCheck {
             DefaultWriter.getInstance(),
             DefaultReader.getInstance()),
 
-    Object(new InferType() {
+    Object(new SupposeType() {
         @Override
-        public boolean infer(Class<?> clz) {
+        public boolean canBeChecked() {
+            return true;
+        }
+
+        @Override
+        public boolean check(Class<?> clz) {
             return true;
         }
     }, DefaultWriter.getInstance(),
             DefaultReader.getInstance());
 
 
-    private final InferType inferType;
+    private final SupposeType supposeType;
+
 
     private final BoxWriter boxWriter;
 
     private final BoxReader boxReader;
 
-    Type(InferType inferType, BoxWriter boxWriter, BoxReader boxReader) {
-        this.inferType = inferType;
+    Type(SupposeType supposeType, BoxWriter boxWriter, BoxReader boxReader) {
+        this.supposeType = supposeType;
         this.boxWriter = boxWriter;
         this.boxReader = boxReader;
     }
 
     @Override
     public boolean canBeChecked() {
-        return !(inferType instanceof NegativeInfer);
+        return supposeType.canBeChecked();
     }
 
     @Override
@@ -236,7 +241,7 @@ public enum Type implements BoxIOComponent, ITypeCheck {
         if (clz == null)
             return Null.equals(this);
 
-        return inferType.infer(clz);
+        return supposeType.check(clz);
     }
 
     @Override

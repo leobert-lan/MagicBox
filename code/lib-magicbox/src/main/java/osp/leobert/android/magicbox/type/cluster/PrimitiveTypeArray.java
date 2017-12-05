@@ -1,16 +1,16 @@
-package osp.leobert.android.magicbox.type.infer.impl;
+package osp.leobert.android.magicbox.type.cluster;
 
-import osp.leobert.android.magicbox.type.infer.InferType;
+import osp.leobert.android.magicbox.type.SupposeType;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.savedstate.type.infer.impl </p>
+ * <p><b>Package:</b> osp.leobert.android.savedstate.type.cluster </p>
  * <p><b>Project:</b> MyJava </p>
  * <p><b>Classname:</b> BasicOrBoxArray </p>
  * <p><b>Description:</b> TODO </p>
  * Created by leobert on 2017/11/19.
  */
 
-public class PrimitiveTypeArray implements InferType {
+public class PrimitiveTypeArray implements SupposeType {
 
     private final Class<?> primitiveComponentClz;
 
@@ -19,7 +19,7 @@ public class PrimitiveTypeArray implements InferType {
     }
 
     @Override
-    public boolean infer(Class<?> clz) {
+    public boolean check(Class<?> clz) {
         if (clz == null || !clz.isArray())
             return false;
 
@@ -31,4 +31,8 @@ public class PrimitiveTypeArray implements InferType {
     }
 
 
+    @Override
+    public boolean canBeChecked() {
+        return true;
+    }
 }

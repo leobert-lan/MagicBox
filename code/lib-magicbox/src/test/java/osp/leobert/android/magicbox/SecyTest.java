@@ -35,7 +35,7 @@ public class SecyTest {
         boolean[] booleans = new boolean[2];
 
         @KeepState
-        Boolean[] booleans2 = new Boolean[2]; //cannot infer
+        Boolean[] booleans2 = new Boolean[2]; //cannot check
 
     }
 
@@ -47,11 +47,11 @@ public class SecyTest {
         testClz = new TestClz();
     }
 
-    @Test
-    public void genStrategy() throws Exception {
-        List<StateField> stateFields = secy.genStrategy(testClz.getClass());
-        System.out.print("end");
-        Assert.assertTrue(true);
-    }
+//    @Test
+//    public void genStrategy() throws Exception {
+//        List<StateField> stateFields = secy.genStrategy(testClz.getClass());
+//        System.out.print("end");
+//        Assert.assertTrue(true);
+//    }
 
 }

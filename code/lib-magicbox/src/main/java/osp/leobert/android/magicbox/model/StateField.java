@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import java.lang.reflect.Field;
 
-import osp.leobert.android.magicbox.BoxIOComponent;
+import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.MException;
 import osp.leobert.android.magicbox.io.BoxReader;
 import osp.leobert.android.magicbox.io.BoxWriter;
