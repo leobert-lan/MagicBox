@@ -237,7 +237,7 @@ public enum Type implements BoxIOComponent, SupposeType {
     }
 
     @Override
-    public boolean check(Class clz) {
+    public boolean check(Class<?> clz) {
         if (clz == null)
             return Null.equals(this);
 

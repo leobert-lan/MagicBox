@@ -1,6 +1,7 @@
 package osp.leobert.android.magicbox.type;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.savedstate.type </p>
@@ -16,7 +17,15 @@ public class TypeInferUtils {
             return Type.Null;
 
         boolean isArray = field.getType().isArray();
-        System.out.println(field.getType());
+//        System.out.println(field.getType());
+        boolean isParameterized = field.getGenericType() instanceof ParameterizedType;
+        Type ret = Type.Infer;
+        if (isParameterized) { //may be some custom like: Foo<Bar>,be attention
+            ret = inferCollection(field);
+        }
+        if (!ret.equals(Type.Infer))
+            return ret;
+
 
         if (isArray) {
             return inferArray(field.getType());
@@ -66,16 +75,34 @@ public class TypeInferUtils {
     private static Type[] implTypeArrays = new Type[]{
             Type.CharSequenceArray,
             Type.ParcelableArray
-//            Types.SerializableArray
     };
 
+    private static Type[] genericCollections = new Type[]{
+            Type.SparseParcelableArray,
+            Type.ParcelableArrayList,
+            Type.IntegerArrayList,
+            Type.StringArrayList,
+            Type.CharSequenceArrayList
+    };
 
-//    Types.SparseParcelableArray,
-//
-//    Types.ParcelableArrayList,
-//    Types.IntegerArrayList,
-//    Types.StringArrayList,
-//    Types.CharSequenceArrayList,
+    ///////////////////////////////////////////////////////////////////////////
+    // infer collections
+    ///////////////////////////////////////////////////////////////////////////
+
+    private static Type inferCollection(Field field) {
+        if (field == null)
+            return Type.Null;
+        for (Type type : genericCollections) {
+            try {
+                if (type.check((Class<?>) field.getGenericType()))
+                    return type;
+            } catch (ClassCastException e) {
+                e.printStackTrace();
+            }
+        }
+        return Type.Infer;
+    }
+
 
     private static Type inferArray(Class<?> fieldClz) {
         Type type = inferPrimitiveTypeArray(fieldClz);
