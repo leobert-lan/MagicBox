@@ -1,5 +1,7 @@
 package osp.leobert.android.magicbox.type.cluster;
 
+import java.lang.reflect.Field;
+
 import osp.leobert.android.magicbox.type.SupposeType;
 
 /**
@@ -19,12 +21,12 @@ public class PrimitiveTypeArray implements SupposeType {
     }
 
     @Override
-    public boolean check(Class<?> clz) {
-        if (clz == null || !clz.isArray())
+    public boolean check(Field field) {
+        if (field == null || !field.getType().isArray())
             return false;
 
 //        String arrayName = clz.getName();
-        Class componentClass = clz.getComponentType();
+        Class componentClass = field.getType().getComponentType();
         String componentName = componentClass.getName();
 
         return primitiveComponentClz.getName().equals(componentName);

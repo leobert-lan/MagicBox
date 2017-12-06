@@ -1,5 +1,7 @@
 package osp.leobert.android.magicbox.type.cluster;
 
+import java.lang.reflect.Field;
+
 import osp.leobert.android.magicbox.type.SupposeType;
 
 /**
@@ -10,9 +12,10 @@ import osp.leobert.android.magicbox.type.SupposeType;
  * Created by leobert on 2017/12/1.
  */
 
-public class NegativeInfer implements SupposeType {
+public class NegativeSuppose implements SupposeType {
+
     @Override
-    public boolean check(Class<?> clz) {
+    public boolean check(Field field) {
         return false;
     }
 

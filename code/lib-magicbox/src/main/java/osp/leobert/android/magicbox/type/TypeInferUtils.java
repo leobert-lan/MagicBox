@@ -28,9 +28,9 @@ public class TypeInferUtils {
 
 
         if (isArray) {
-            return inferArray(field.getType());
+            return inferArray(field);
         } else {
-            return inferObject(field.getType());
+            return inferObject(field);
         }
     }
 
@@ -94,7 +94,7 @@ public class TypeInferUtils {
             return Type.Null;
         for (Type type : genericCollections) {
             try {
-                if (type.check((Class<?>) field.getGenericType()))
+                if (type.check(field))
                     return type;
             } catch (ClassCastException e) {
                 e.printStackTrace();
@@ -104,45 +104,45 @@ public class TypeInferUtils {
     }
 
 
-    private static Type inferArray(Class<?> fieldClz) {
-        Type type = inferPrimitiveTypeArray(fieldClz);
+    private static Type inferArray(Field field) {
+        Type type = inferPrimitiveTypeArray(field);
 
         if (type.equals(Type.Infer)) {
-            type = inferSimpleTypeArray(fieldClz);
+            type = inferSimpleTypeArray(field);
         }
 
         if (type.equals(Type.Infer)) {
-            type = inferImplArray(fieldClz);
+            type = inferImplArray(field);
         }
 
         return type;
     }
 
-    private static Type inferPrimitiveTypeArray(Class<?> clz) {
-        if (clz == null)
+    private static Type inferPrimitiveTypeArray(Field field) {
+        if (field == null)
             return Type.Null;
         for (Type type : primitiveTypeArrays) {
-            if (type.check(clz))
+            if (type.check(field))
                 return type;
         }
         return Type.Infer;
     }
 
-    private static Type inferSimpleTypeArray(Class<?> clz) {
-        if (clz == null)
+    private static Type inferSimpleTypeArray(Field field) {
+        if (field == null)
             return Type.Null;
         for (Type type : simpleTypeArrays) {
-            if (type.check(clz))
+            if (type.check(field))
                 return type;
         }
         return Type.Infer;
     }
 
-    private static Type inferImplArray(Class<?> clz) {
-        if (clz == null)
+    private static Type inferImplArray(Field field) {
+        if (field == null)
             return Type.Null;
         for (Type type : implTypeArrays) {
-            if (type.check(clz.getClass()))
+            if (type.check(field))
                 return type;
         }
         return Type.Infer;
@@ -154,47 +154,47 @@ public class TypeInferUtils {
     ///////////////////////////////////////////////////////////////////////////
 
 
-    private static Type inferObject(Class<?> fieldClz) {
+    private static Type inferObject(Field field) {
         //boxed type will be inferred to be impl of Serializable
-        Type type = inferPrimitiveTypes(fieldClz);
+        Type type = inferPrimitiveTypes(field);
 
         if (type.equals(Type.Infer)) {
-            type = inferSimpleType(fieldClz);
+            type = inferSimpleType(field);
         }
 
         if (type.equals(Type.Infer)) {
-            type = inferImpl(fieldClz);
+            type = inferImpl(field);
         }
 
         return type;
     }
 
 
-    private static Type inferPrimitiveTypes(Class<?> clz) {
-        if (clz == null)
+    private static Type inferPrimitiveTypes(Field field) {
+        if (field == null)
             return Type.Null;
         for (Type type : primitiveTypes) {
-            if (type.check(clz))
+            if (type.check(field))
                 return type;
         }
         return Type.Infer;
     }
 
-    private static Type inferSimpleType(Class<?> clz) {
-        if (clz == null)
+    private static Type inferSimpleType(Field field) {
+        if (field == null)
             return Type.Null;
         for (Type type : simpleTypes) {
-            if (type.check(clz))
+            if (type.check(field))
                 return type;
         }
         return Type.Infer;
     }
 
-    private static Type inferImpl(Class<?> clz) {
-        if (clz == null)
+    private static Type inferImpl(Field field) {
+        if (field == null)
             return Type.Null;
         for (Type type : implTypes) {
-            if (type.check(clz))
+            if (type.check(field))
                 return type;
         }
         return Type.Infer;

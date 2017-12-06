@@ -1,6 +1,8 @@
 package osp.leobert.android.magicbox.type.cluster;
 
 
+import java.lang.reflect.Field;
+
 import osp.leobert.android.magicbox.type.SupposeType;
 
 /**
@@ -21,12 +23,12 @@ public class ImplementationArray implements SupposeType {
     }
 
     @Override
-    public boolean check(Class<?> clz) {
-        if (clz == null)
+    public boolean check(Field field) {
+        if (field == null)
             return false;
-        if (!clz.isArray())
+        if (!field.getType().isArray())
             return false;
-        Class cc = clz.getComponentType();
+        Class cc = field.getType().getComponentType();
         return typeInterface.isAssignableFrom(cc);
     }
 

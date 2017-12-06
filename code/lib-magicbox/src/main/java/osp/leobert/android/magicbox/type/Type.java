@@ -1,6 +1,12 @@
 package osp.leobert.android.magicbox.type;
 
 
+import android.os.Parcelable;
+import android.util.SparseArray;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.io.BoxReader;
 import osp.leobert.android.magicbox.io.BoxWriter;
@@ -63,9 +69,11 @@ import osp.leobert.android.magicbox.io.writers.StringArrayWriter;
 import osp.leobert.android.magicbox.io.writers.StringWriter;
 import osp.leobert.android.magicbox.type.cluster.Implementation;
 import osp.leobert.android.magicbox.type.cluster.ImplementationArray;
-import osp.leobert.android.magicbox.type.cluster.NegativeInfer;
+import osp.leobert.android.magicbox.type.cluster.ImplementationCollection;
+import osp.leobert.android.magicbox.type.cluster.NegativeSuppose;
 import osp.leobert.android.magicbox.type.cluster.PrimitiveType;
 import osp.leobert.android.magicbox.type.cluster.PrimitiveTypeArray;
+import osp.leobert.android.magicbox.type.cluster.SimpleCollection;
 import osp.leobert.android.magicbox.type.cluster.SimpleType;
 import osp.leobert.android.magicbox.type.cluster.SimpleTypeArray;
 
@@ -78,7 +86,7 @@ import osp.leobert.android.magicbox.type.cluster.SimpleTypeArray;
  */
 
 public enum Type implements BoxIOComponent, SupposeType {
-    Infer(new NegativeInfer(),
+    Infer(new NegativeSuppose(),
             DefaultWriter.getInstance(),
             DefaultReader.getInstance()),
 
@@ -180,27 +188,27 @@ public enum Type implements BoxIOComponent, SupposeType {
             ParcelableArrayWriter.getInstance(),
             ParcelableArrayReader.getInstance()),
 
-    SparseParcelableArray(new NegativeInfer(),
+    SparseParcelableArray(new ImplementationCollection(SparseArray.class,Parcelable.class),
             SparseParcelableArrayWriter.getInstance(),
             SparseParcelableArrayReader.getInstance()),
 
-    ParcelableArrayList(new NegativeInfer(),
+    ParcelableArrayList(new ImplementationCollection(ArrayList.class, android.os.Parcelable.class),
             ParcelableArrayListWriter.getInstance(),
             ParcelableArrayListReader.getInstance()),
 
-    IntegerArrayList(new NegativeInfer(),
+    IntegerArrayList(new SimpleCollection(ArrayList.class, Integer.class),
             IntegerArrayListWriter.getInstance(),
             IntegerArrayListReader.getInstance()),
 
-    StringArrayList(new NegativeInfer(),
+    StringArrayList(new SimpleCollection(ArrayList.class, String.class),
             StringArrayListWriter.getInstance(),
             StringArrayListReader.getInstance()),
 
-    CharSequenceArrayList(new NegativeInfer(),
+    CharSequenceArrayList(new ImplementationCollection(ArrayList.class, java.lang.CharSequence.class),
             CharSequenceArrayListWriter.getInstance(),
             CharSequenceArrayListReader.getInstance()),
 
-    Null(new NegativeInfer(),
+    Null(new NegativeSuppose(),
             DefaultWriter.getInstance(),
             DefaultReader.getInstance()),
 
@@ -211,7 +219,7 @@ public enum Type implements BoxIOComponent, SupposeType {
         }
 
         @Override
-        public boolean check(Class<?> clz) {
+        public boolean check(Field field) {
             return true;
         }
     }, DefaultWriter.getInstance(),
@@ -237,11 +245,11 @@ public enum Type implements BoxIOComponent, SupposeType {
     }
 
     @Override
-    public boolean check(Class<?> clz) {
-        if (clz == null)
+    public boolean check(Field field) {
+        if (field == null)
             return Null.equals(this);
 
-        return supposeType.check(clz);
+        return supposeType.check(field);
     }
 
     @Override

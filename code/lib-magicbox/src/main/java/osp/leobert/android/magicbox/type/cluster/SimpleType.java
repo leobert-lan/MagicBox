@@ -1,6 +1,8 @@
 package osp.leobert.android.magicbox.type.cluster;
 
 
+import java.lang.reflect.Field;
+
 import osp.leobert.android.magicbox.type.SupposeType;
 
 /**
@@ -21,13 +23,13 @@ public class SimpleType implements SupposeType {
     }
 
     @Override
-    public boolean check(Class clz) {
+    public boolean check(Field field) {
 //        if (clz == null)
 //            return false;
 //        return type != null && type.equals(clz.getName());
         //simplify to follow code
 
-        return clz != null && type != null && type.getName().equals(clz.getName());
+        return field != null && type != null && type.getName().equals(field.getType().getName());
 
     }
 

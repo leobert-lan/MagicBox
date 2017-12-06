@@ -1,5 +1,7 @@
 package osp.leobert.android.magicbox.type;
 
+import java.lang.reflect.Field;
+
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.type </p>
  * <p><b>Project:</b> code </p>
@@ -9,5 +11,5 @@ package osp.leobert.android.magicbox.type;
  */
 
 public interface SupposeType extends ICheckable{
-    boolean check(Class<?> clz);
+    boolean check(Field field);
 }

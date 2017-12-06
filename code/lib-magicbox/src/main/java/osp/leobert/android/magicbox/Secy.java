@@ -66,7 +66,7 @@ final class Secy {
         return genStrategy(objectClz);
     }
 
-    private List<StateField> genStrategy(@NonNull Class objectClz) {
+    List<StateField> genStrategy(@NonNull Class objectClz) {
         List<StateField> strategy = new ArrayList<>();
 
         List<Field> list = Arrays.asList(objectClz.getDeclaredFields());
@@ -112,8 +112,8 @@ final class Secy {
                 throw new MException(e.getMessage());
             }
         } else {
-            if (!type.canBeChecked()) {
-                boolean isCorrectType = type.check(field.getType());
+            if (type.canBeChecked()) {
+                boolean isCorrectType = type.check(field);
                 if (!isCorrectType) {
                     logger.error("", "unCorrect Type set for" + fieldName);
                     return new StateField(fieldName, field, bundleKey, Type.Infer);

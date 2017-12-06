@@ -1,5 +1,7 @@
 package osp.leobert.android.magicbox.type.cluster;
 
+import java.lang.reflect.Field;
+
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.type.cluster </p>
  * <p><b>Project:</b> code </p>
@@ -13,5 +15,10 @@ public class PrimitiveType extends SimpleType {
         super(type);
         if (!type.isPrimitive())
             throw new IllegalArgumentException("should init with a primitive type,but not "+ type.getName());
+    }
+
+    @Override
+    public boolean check(Field field) {
+        return super.check(field) && field.getType().isPrimitive();
     }
 }

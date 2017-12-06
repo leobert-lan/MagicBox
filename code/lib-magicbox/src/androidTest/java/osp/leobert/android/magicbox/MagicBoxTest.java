@@ -1,11 +1,17 @@
 package osp.leobert.android.magicbox;
 
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.SparseArray;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
 import osp.leobert.android.magicbox.type.Type;
@@ -20,6 +26,28 @@ import osp.leobert.android.magicbox.type.Type;
 @RunWith(AndroidJUnit4.class)
 public class MagicBoxTest {
 
+    private static class TestPar implements Parcelable {
+        int i;
+
+        public int getI() {
+            return i;
+        }
+
+        public void setI(int i) {
+            this.i = i;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(i);
+        }
+    }
+
     private static class TestClz {
 
         @KeepState
@@ -28,8 +56,10 @@ public class MagicBoxTest {
         @KeepState
         Boolean testNullBoxBool = true;
 
+        @KeepState
         byte testByte1;
 
+        @KeepState
         Byte testByte2;
 
 
@@ -51,6 +81,24 @@ public class MagicBoxTest {
         @KeepState(type = Type.Object)
         Object custom;
 
+        @KeepState
+        ArrayList<CharSequence> charSequences;
+
+        @KeepState
+        List<CharSequence> charSequences2;
+
+        @KeepState
+        ArrayList<Integer> integers;
+
+        @KeepState
+        ArrayList<String> strings;
+
+        @KeepState
+        ArrayList<Parcelable> parcelables;
+
+        @KeepState
+        SparseArray<TestPar> parSparseArray;
+
 
         public void foo() {
             testBool = false;
@@ -64,6 +112,32 @@ public class MagicBoxTest {
             booleans2 = new Boolean[2];
             booleans2[0] = null;
             booleans2[1] = true;
+
+            charSequences = new ArrayList<>();
+            charSequences.add("hahaha");
+
+            charSequences2 = new ArrayList<>();
+            charSequences2.add("test");
+
+            integers = new ArrayList<>();
+            integers.add(null);
+            integers.add(2);
+
+            strings = new ArrayList<>();
+            strings.add(null);
+            strings.add("foo");
+
+            parcelables = new ArrayList<>();
+            TestPar testPar = new TestPar();
+            testPar.setI(10);
+            parcelables.add(null);
+            parcelables.add(testPar);
+
+
+            parSparseArray = new SparseArray<>();
+            parSparseArray.append(0,null);
+            parSparseArray.append(1,testPar);
+
 
         }
     }
