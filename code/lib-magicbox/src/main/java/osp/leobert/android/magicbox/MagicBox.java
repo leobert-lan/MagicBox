@@ -1,18 +1,13 @@
 package osp.leobert.android.magicbox;
 
-import android.annotation.SuppressLint;
-import android.app.Instrumentation;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import osp.leobert.android.magicbox.log.ILogger;
 import osp.leobert.android.magicbox.log.impl.DefaultLogger;
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.proxy.MagicBoxInstrumentation;
-import osp.leobert.android.magicbox.proxy.hook.HookHelper;
 
 
 /**
@@ -45,27 +40,6 @@ public class MagicBox {
         return instance;
     }
 
-    @SuppressLint("PrivateApi")
-    public static void globalDelegateMode() {
-        final String msg_fail = "cannot enable global delegate mode";
-        try {
-            Class<?> activityThreadClz = Class.forName(HookHelper.NAME_ACTIVITY_THREAD);
-            Object owner = HookHelper.getCurrentActivityThreadObject();
-            Instrumentation mBase = HookHelper.getOriginalInstrumentation(activityThreadClz, owner);
-            Field field = HookHelper.getOriginalInstrumentationField(activityThreadClz);
-//            Instrumentation proxy = MagicBoxInstrumentationProxy.create(mBase);
-
-            Instrumentation proxy = new MagicBoxInstrumentation(mBase);
-
-//            if (owner == null || field == null||proxy == null)  ignore check
-
-            HookHelper.hookInstrumentation(owner, field, proxy);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            getLogger().error("[globalDelegateMode]", msg_fail);
-        }
-    }
 
     public static void setLogEnable(boolean enable) {
         logger.showLog(enable);
