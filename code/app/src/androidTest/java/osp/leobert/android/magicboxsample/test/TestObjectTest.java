@@ -48,7 +48,7 @@ public class TestObjectTest {
     @Before
     public void setUp() throws Exception {
         magicBox = MagicBox.getInstance();
-        magicBox.setLogEnable(true);
+        MagicBox.setLogEnable(true);
         bundle = new Bundle();
 
         wrapper1 = new Wrapper();

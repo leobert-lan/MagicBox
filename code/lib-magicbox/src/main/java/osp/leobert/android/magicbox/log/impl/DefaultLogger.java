@@ -51,6 +51,7 @@ public class DefaultLogger implements ILogger {
         isShowStackTrace = showStackTrace;
     }
 
+    @Override
     public void showMonitor(boolean showMonitor) {
         isMonitorMode = showMonitor;
     }

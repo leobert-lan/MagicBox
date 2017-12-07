@@ -45,6 +45,8 @@ public interface ILogger {
 
     void showStackTrace(boolean isShowStackTrace);
 
+    void showMonitor(boolean isShowMonitor);
+
     void debug(String tag, String message);
 
     void info(String tag, String message);

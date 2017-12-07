@@ -17,7 +17,6 @@ import osp.leobert.android.magicbox.model.StateField;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicbox.type.TypeInferUtils;
 
-import static osp.leobert.android.magicbox.log.ILogger.logger;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox </p>
@@ -115,11 +114,11 @@ final class Secy {
             if (type.canBeChecked()) {
                 boolean isCorrectType = type.check(field);
                 if (!isCorrectType) {
-                    logger.error("", "unCorrect Type set for" + fieldName);
+                    MagicBox.getLogger().error("", "unCorrect Type set for" + fieldName);
                     return new StateField(fieldName, field, bundleKey, Type.Infer);
                 }
             } else {
-                logger.debug("", "you have notated " + fieldName + " as " + type.name() +
+                MagicBox.getLogger().debug("", "you have notated " + fieldName + " as " + type.name() +
                         ", one cannot be checked, with cautions");
             }
         }
