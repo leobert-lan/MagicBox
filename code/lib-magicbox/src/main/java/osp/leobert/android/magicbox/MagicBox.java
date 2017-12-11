@@ -46,8 +46,8 @@ public class MagicBox {
         return instance;
     }
 
-    public void globalDelegate(Application application) {
-
+    public void globalDelegateMode(Application application) {
+        secy.hookInstrumentation(application);
     }
 
 

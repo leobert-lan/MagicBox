@@ -1,5 +1,8 @@
 package osp.leobert.android.magicbox;
 
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.app.Instrumentation;
 import android.support.annotation.NonNull;
 
 import java.lang.annotation.Annotation;
@@ -14,6 +17,7 @@ import java.util.Map;
 import osp.leobert.android.magicbox.annotations.KeepState;
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.proxy.InstrumentationProxy;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicbox.type.TypeInferUtils;
 
@@ -133,5 +137,27 @@ final class Secy {
         BoxIOComponent ioComponent = clz.getConstructor().newInstance();
 
         return new StateField(fieldName, field, bundleKey, ioComponent);
+    }
+
+    @SuppressLint("PrivateApi")
+    public void hookInstrumentation(Application application) {
+
+        final String msg_fail = "cannot enable global delegate mode";
+        try {
+            Class<?> activityThreadClz = Class.forName(HookHelper.NAME_ACTIVITY_THREAD);
+            Object owner = HookHelper.getCurrentActivityThreadObject();
+//            Instrumentation mBase = HookHelper.getOriginalInstrumentation(activityThreadClz, owner);
+            Field field = HookHelper.getOriginalInstrumentationField(activityThreadClz);
+
+            Instrumentation proxy = InstrumentationProxy.create(application);
+
+//            if (owner == null || field == null||proxy == null)  ignore check
+
+            HookHelper.hookInstrumentation(owner, field, proxy);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            MagicBox.getLogger().error("[globalDelegateMode]", msg_fail);
+        }
     }
 }

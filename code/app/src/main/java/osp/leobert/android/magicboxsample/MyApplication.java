@@ -17,5 +17,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         MagicBox.setLogEnable(true);
+        MagicBox.getInstance().globalDelegateMode(this);
     }
 }
