@@ -12,6 +12,7 @@ import osp.leobert.android.magicbox.io.BoxReader;
 import osp.leobert.android.magicbox.io.BoxWriter;
 import osp.leobert.android.magicbox.io.readers.BooleanArrayReader;
 import osp.leobert.android.magicbox.io.readers.BooleanReader;
+import osp.leobert.android.magicbox.io.readers.BundleReader;
 import osp.leobert.android.magicbox.io.readers.ByteArrayReader;
 import osp.leobert.android.magicbox.io.readers.ByteReader;
 import osp.leobert.android.magicbox.io.readers.CharArrayReader;
@@ -40,6 +41,7 @@ import osp.leobert.android.magicbox.io.readers.StringArrayReader;
 import osp.leobert.android.magicbox.io.readers.StringReader;
 import osp.leobert.android.magicbox.io.writers.BooleanArrayWriter;
 import osp.leobert.android.magicbox.io.writers.BooleanWriter;
+import osp.leobert.android.magicbox.io.writers.BundleWriter;
 import osp.leobert.android.magicbox.io.writers.ByteArrayWriter;
 import osp.leobert.android.magicbox.io.writers.ByteWriter;
 import osp.leobert.android.magicbox.io.writers.CharArrayWriter;
@@ -126,6 +128,10 @@ public enum Type implements BoxIOComponent, SupposeType {
             StringWriter.getInstance(),
             StringReader.getInstance()),
 
+    Bundle(new SimpleType(android.os.Bundle.class),
+            BundleWriter.getInstance(),
+            BundleReader.getInstance()),
+
     CharSequence(new Implementation(java.lang.CharSequence.class),
             CharWriter.getInstance(),
             CharReader.getInstance()),
@@ -188,7 +194,7 @@ public enum Type implements BoxIOComponent, SupposeType {
             ParcelableArrayWriter.getInstance(),
             ParcelableArrayReader.getInstance()),
 
-    SparseParcelableArray(new ImplementationCollection(SparseArray.class,Parcelable.class),
+    SparseParcelableArray(new ImplementationCollection(SparseArray.class, Parcelable.class),
             SparseParcelableArrayWriter.getInstance(),
             SparseParcelableArrayReader.getInstance()),
 

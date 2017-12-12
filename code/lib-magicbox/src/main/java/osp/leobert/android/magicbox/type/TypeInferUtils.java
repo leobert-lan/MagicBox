@@ -48,7 +48,8 @@ public class TypeInferUtils {
     private static Type[] simpleTypes = new Type[]{
             Type.String,
             Type.Size,
-            Type.SizeF
+            Type.SizeF,
+            Type.Bundle
     };
 
     private static Type[] implTypes = new Type[]{
