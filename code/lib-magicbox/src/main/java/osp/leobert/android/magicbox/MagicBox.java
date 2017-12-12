@@ -1,7 +1,5 @@
 package osp.leobert.android.magicbox;
 
-import android.app.Application;
-import android.app.Instrumentation;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
@@ -10,10 +8,6 @@ import java.util.List;
 import osp.leobert.android.magicbox.log.ILogger;
 import osp.leobert.android.magicbox.log.impl.DefaultLogger;
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.proxy.InstrumentationProxy;
-import osp.leobert.android.proxy.EnhancerProxy;
-import osp.leobert.android.proxy.method.MethodProxy;
-import osp.leobert.android.proxy.method.interceptor.MethodInterceptor;
 
 
 /**
@@ -46,8 +40,8 @@ public class MagicBox {
         return instance;
     }
 
-    public void globalDelegateMode(Application application) {
-        secy.hookInstrumentation(application);
+    public void globalDelegateMode() {
+        secy.hookInstrumentation();
     }
 
 

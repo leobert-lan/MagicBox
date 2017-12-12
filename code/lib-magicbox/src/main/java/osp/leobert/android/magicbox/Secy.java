@@ -1,7 +1,6 @@
 package osp.leobert.android.magicbox;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
 import android.app.Instrumentation;
 import android.support.annotation.NonNull;
 
@@ -15,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.fake.MagicBoxInstrumentation;
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.proxy.InstrumentationProxy;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicbox.type.TypeInferUtils;
 
@@ -140,7 +139,7 @@ final class Secy {
     }
 
     @SuppressLint("PrivateApi")
-    public void hookInstrumentation(Application application) {
+    public void hookInstrumentation() {
 
         final String msg_fail = "cannot enable global delegate mode";
         try {
@@ -149,8 +148,8 @@ final class Secy {
 //            Instrumentation mBase = HookHelper.getOriginalInstrumentation(activityThreadClz, owner);
             Field field = HookHelper.getOriginalInstrumentationField(activityThreadClz);
 
-            Instrumentation proxy = InstrumentationProxy.create(application);
-
+//            Instrumentation proxy = InstrumentationProxy.create(application);
+            Instrumentation proxy = new MagicBoxInstrumentation();
 //            if (owner == null || field == null||proxy == null)  ignore check
 
             HookHelper.hookInstrumentation(owner, field, proxy);
