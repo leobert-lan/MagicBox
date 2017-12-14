@@ -20,6 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
+ *
  */
 
 package osp.leobert.android.magicbox.log;
@@ -28,8 +29,8 @@ package osp.leobert.android.magicbox.log;
 import osp.leobert.android.magicbox.log.impl.DefaultLogger;
 
 /**
- * <p><b>Package:</b> osp.leobert.ijk.common </p>
- * <p><b>Project:</b> ijklib </p>
+ * <p><b>Package:</b> osp.leobert.android.magicbox.log </p>
+ * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> ILogger </p>
  * <p><b>Description:</b> logger </p>
  * Created by leobert on 2017/10/12.

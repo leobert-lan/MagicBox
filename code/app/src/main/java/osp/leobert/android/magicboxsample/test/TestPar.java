@@ -23,40 +23,57 @@
  *
  */
 
-package osp.leobert.android.magicbox.io.readers;
+package osp.leobert.android.magicboxsample.test;
 
-import android.os.Bundle;
-
-import java.lang.reflect.Field;
-
-import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BoxReader;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
+ * <p><b>Package:</b> osp.leobert.android.magicboxsample.test </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> LongArrayReader </p>
- * <p><b>Description:</b> readerimpl </p>
- * Created by leobert on 2017/12/1.
+ * <p><b>Classname:</b> TestPar </p>
+ * <p><b>Description:</b> TODO </p>
+ * Created by leobert on 2017/12/14.
  */
 
-public class LongArrayReader implements BoxReader {
-    private static LongArrayReader instance = null;
+public class TestPar implements Parcelable {
+    int i;
 
-    private LongArrayReader() {
-        // single
+    public TestPar() {
     }
 
-    public static LongArrayReader getInstance() {
-        if (instance == null)
-            instance = new LongArrayReader();
-        return instance;
+    protected TestPar(Parcel in) {
+        i = in.readInt();
+    }
+
+    public static final Creator<TestPar> CREATOR = new Creator<TestPar>() {
+        @Override
+        public TestPar createFromParcel(Parcel in) {
+            return new TestPar(in);
+        }
+
+        @Override
+        public TestPar[] newArray(int size) {
+            return new TestPar[size];
+        }
+    };
+
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
     }
 
     @Override
-    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-        propertyField.set(to,bundle.getLongArray(field.getBundleKey()));
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(i);
     }
 }
+

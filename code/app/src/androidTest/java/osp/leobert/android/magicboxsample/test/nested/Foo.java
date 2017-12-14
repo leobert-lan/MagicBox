@@ -23,40 +23,27 @@
  *
  */
 
-package osp.leobert.android.magicbox.io.readers;
+package osp.leobert.android.magicboxsample.test.nested;
 
-import android.os.Bundle;
-
-import java.lang.reflect.Field;
-
-import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.annotations.KeepState;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
+ * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> LongArrayReader </p>
- * <p><b>Description:</b> readerimpl </p>
- * Created by leobert on 2017/12/1.
+ * <p><b>Classname:</b> Foo </p>
+ * <p><b>Description:</b> TODO </p>
+ * Created by leobert on 2017/12/14.
  */
 
-public class LongArrayReader implements BoxReader {
-    private static LongArrayReader instance = null;
+class Foo {
+    @KeepState
+    String foo;
 
-    private LongArrayReader() {
-        // single
+    public String getFoo() {
+        return foo;
     }
 
-    public static LongArrayReader getInstance() {
-        if (instance == null)
-            instance = new LongArrayReader();
-        return instance;
-    }
-
-    @Override
-    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-        propertyField.set(to,bundle.getLongArray(field.getBundleKey()));
+    public void setFoo(String foo) {
+        this.foo = foo;
     }
 }

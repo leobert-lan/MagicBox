@@ -23,40 +23,53 @@
  *
  */
 
-package osp.leobert.android.magicbox.io.readers;
+package osp.leobert.android.magicboxsample.test.nested;
 
 import android.os.Bundle;
+import android.support.test.runner.AndroidJUnit4;
 
-import java.lang.reflect.Field;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.MagicBox;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
+ * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> LongArrayReader </p>
- * <p><b>Description:</b> readerimpl </p>
- * Created by leobert on 2017/12/1.
+ * <p><b>Classname:</b> TestNested </p>
+ * <p><b>Description:</b> TODO </p>
+ * Created by leobert on 2017/12/14.
  */
+@RunWith(AndroidJUnit4.class)
+public class TestNested {
+    MagicBox magicBox;
+    Bar test1;
+    Bar test2;
+    Bundle bundle;
 
-public class LongArrayReader implements BoxReader {
-    private static LongArrayReader instance = null;
+    @Before
+    public void setUp() throws Exception {
+        magicBox = MagicBox.getInstance();
+        magicBox.setLogEnable(true);
+        bundle = new Bundle();
+        test1 = new Bar();
+        test1.setFoo("foo");
+        test1.setBar("bar");
 
-    private LongArrayReader() {
-        // single
+        test2 = new Bar();
+
+        saveInstanceState();
     }
 
-    public static LongArrayReader getInstance() {
-        if (instance == null)
-            instance = new LongArrayReader();
-        return instance;
+    //    @Test
+    public void saveInstanceState() throws Exception {
+        magicBox.saveInstanceState(test1, bundle);
     }
 
-    @Override
-    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-        propertyField.set(to,bundle.getLongArray(field.getBundleKey()));
+    @Test
+    public void restoreInstanceState() throws Exception {
+        magicBox.restoreInstanceState(test2, bundle);
+        System.out.println(test2);
     }
 }
