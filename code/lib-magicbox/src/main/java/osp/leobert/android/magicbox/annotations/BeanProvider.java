@@ -23,45 +23,22 @@
  *
  */
 
-package osp.leobert.android.magicbox.io.readers;
+package osp.leobert.android.magicbox.annotations;
 
-import android.os.Bundle;
-
-import java.lang.reflect.Field;
-
-import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BoxReader;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
+ * <p><b>Package:</b> osp.leobert.android.magicbox.annotations </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> ParcelableArrayListReader </p>
- * <p><b>Description:</b> readerimpl </p>
- * Created by leobert on 2017/12/1.
+ * <p><b>Classname:</b> BeanProvider </p>
+ * <p><b>Description:</b> TODO </p>
+ * Created by leobert on 2017/12/19.
  */
-
-public class ParcelableArrayListReader implements BoxReader {
-    private static ParcelableArrayListReader instance = null;
-
-    private ParcelableArrayListReader() {
-        // single
-    }
-
-    public static ParcelableArrayListReader getInstance() {
-        if (instance == null)
-            instance = new ParcelableArrayListReader();
-        return instance;
-    }
-
-    @Override
-    public boolean preHandleNull() {
-        return false;
-    }
-
-    @Override
-    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-        propertyField.set(to,bundle.getParcelableArrayList(field.getBundleKey()));
-    }
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@Deprecated
+public @interface BeanProvider {
 }

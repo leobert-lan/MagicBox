@@ -30,9 +30,10 @@ import android.support.annotation.NonNull;
 
 import java.lang.reflect.Field;
 
-import osp.leobert.android.magicbox.MagicBox;
-import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.MException;
+import osp.leobert.android.magicbox.MagicBox;
+import osp.leobert.android.magicbox.di.Factory;
+import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.io.BoxReader;
 import osp.leobert.android.magicbox.io.BoxWriter;
 
@@ -96,9 +97,8 @@ public class StateField {
     public void save(@NonNull Object object, @NonNull Bundle bundle) {
         BoxWriter writer = getIoComponent().getBoxWriter();
         if (object == null) { //runtime check
-            MagicBox.getLogger().error("StateField#save","ignore save anything of one null target");
+            MagicBox.getLogger().error("StateField#save", "ignore save anything of one null target");
             return;
-
         }
         try {
             writer.write(bundle, object, this);
@@ -109,9 +109,18 @@ public class StateField {
     }
 
 
-    public void restore(@NonNull Object object, @NonNull Bundle bundle) {
+    public void restore(@NonNull Object object, @NonNull Bundle bundle, @NonNull Factory beanFactory) {
         BoxReader reader = getIoComponent().getBoxReader();
-        // TODO: 2017/12/4  check null
+        if (object == null && reader.preHandleNull()) { //runtime check
+            object = beanFactory.getBean();
+        }
+
+        if (object == null) { //runtime check
+            MagicBox.getLogger().error("StateField#restore", "ignore restore anything of one null target");
+            return;
+        }
+
+
         try {
             reader.read(bundle, object, this);
         } catch (IllegalAccessException e) {

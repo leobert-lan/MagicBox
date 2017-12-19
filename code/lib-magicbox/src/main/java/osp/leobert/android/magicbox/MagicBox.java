@@ -89,19 +89,20 @@ public class MagicBox {
         }
     }
 
-    public void restoreInstanceState(@NonNull Object object, @NonNull Bundle bundle) {
-        if (object == null) { //runtime check
+    public void restoreInstanceState(@NonNull VisitCard visitCard, @NonNull Bundle bundle) {
+        if (visitCard == null) { //runtime check
             getLogger().error("[restoreInstanceState]","cannot restore instance state for null");
             return;
         }
-        List<StateField> strategy = secy.fetchStrategy(object);
+        List<StateField> strategy = secy.fetchStrategy(visitCard);
 
         for (StateField field : strategy) {
-            field.restore(object, bundle);
+            field.restore(visitCard.getOneSelf(), bundle,visitCard.getBeanFactory());
         }
     }
 
     public boolean isStrategyExist(@NonNull Object object) {
+        // TODO: 2017/12/19 not safety
         return secy.isStrategyExist(object);
     }
 

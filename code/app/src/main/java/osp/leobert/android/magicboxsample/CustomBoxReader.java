@@ -38,4 +38,5 @@ public class CustomBoxReader extends BaseCustomBoxReader {
 
         return gson.fromJson(s,type);
     }
+
 }

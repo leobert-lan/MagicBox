@@ -62,7 +62,7 @@ public class TestObjectTest {
     @Test
     public void testRestore() {
         wrapper2 = new Wrapper();
-        magicBox.restoreInstanceState(wrapper2,bundle);
+        magicBox.restoreInstanceState(VisitCard.make(wrapper2),bundle);
         System.out.println(wrapper2);
         Assert.assertTrue(true);
 

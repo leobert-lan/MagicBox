@@ -46,8 +46,8 @@ public class NestedDemo2Activity extends AppCompatActivity {
 
     private static int testCase =
 //            CASE_NORMAL; //
-//            CASE_NORMAL_NULL;
-    CASE_NULL_NULL;
+            CASE_NORMAL_NULL;
+//    CASE_NULL_NULL;
 
     //    @KeepState(type = Type.Object,io = BoxIOComponent.DelegateIOComponent.class) or more simple：
     @KeepState(type = Type.Delegate)

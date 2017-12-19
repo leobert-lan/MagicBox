@@ -27,8 +27,10 @@ package osp.leobert.android.magicboxsample.test.nested2;
 
 import com.google.gson.Gson;
 
+import osp.leobert.android.magicbox.annotations.BeanFactory;
 import osp.leobert.android.magicbox.annotations.KeepState;
 import osp.leobert.android.magicbox.annotations.KeepSuperState;
+import osp.leobert.android.magicbox.di.Factory;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested2 </p>
@@ -39,7 +41,8 @@ import osp.leobert.android.magicbox.annotations.KeepSuperState;
  */
 
 @KeepSuperState
-public class Bar extends Foo{
+@BeanFactory(factory = Bar.BarFactory.class)
+public class Bar extends Foo {
     @KeepState
     private String bar;
 
@@ -54,5 +57,13 @@ public class Bar extends Foo{
     @Override
     public String toString() {
         return new Gson().toJson(this);
+    }
+
+    public static final class BarFactory extends Factory<Bar> {
+
+        @Override
+        public Bar getBean() {
+            return new Bar();
+        }
     }
 }

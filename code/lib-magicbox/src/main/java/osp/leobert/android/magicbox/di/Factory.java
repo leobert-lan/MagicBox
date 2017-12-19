@@ -23,45 +23,42 @@
  *
  */
 
-package osp.leobert.android.magicbox.io.readers;
+package osp.leobert.android.magicbox.di;
 
-import android.os.Bundle;
-
-import java.lang.reflect.Field;
-
-import osp.leobert.android.magicbox.model.StateField;
-import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.annotations.BeanProvider;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
+ * <p><b>Package:</b> osp.leobert.android.magicbox.di </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> ParcelableArrayListReader </p>
- * <p><b>Description:</b> readerimpl </p>
- * Created by leobert on 2017/12/1.
+ * <p><b>Classname:</b> Factory </p>
+ * <p><b>Description:</b> TODO </p>
+ * Created by leobert on 2017/12/19.
  */
 
-public class ParcelableArrayListReader implements BoxReader {
-    private static ParcelableArrayListReader instance = null;
+public abstract class Factory<T> {
+    public Factory() {
 
-    private ParcelableArrayListReader() {
-        // single
     }
 
-    public static ParcelableArrayListReader getInstance() {
-        if (instance == null)
-            instance = new ParcelableArrayListReader();
-        return instance;
-    }
+    @BeanProvider
+    public abstract T getBean();
 
-    @Override
-    public boolean preHandleNull() {
-        return false;
-    }
+    public static final class NullFactory extends Factory {
+        private static NullFactory instance = null;
 
-    @Override
-    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        Field propertyField = field.getField();
-        propertyField.setAccessible(true);
-        propertyField.set(to,bundle.getParcelableArrayList(field.getBundleKey()));
+        private NullFactory() {
+            // single
+        }
+
+        public static NullFactory getInstance() {
+            if (instance == null)
+                instance = new NullFactory();
+            return instance;
+        }
+
+        @Override
+        public Object getBean() {
+            return null;
+        }
     }
 }

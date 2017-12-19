@@ -71,7 +71,7 @@ public class TestNested {
 
     @Test
     public void restoreInstanceState() throws Exception {
-        magicBox.restoreInstanceState(test2, bundle);
+        magicBox.restoreInstanceState(VisitCard.make(test2), bundle);
         System.out.println(test2);
     }
 
@@ -90,7 +90,7 @@ public class TestNested {
         Bundle bundle = new Bundle();
         magicBox.saveInstanceState(VisitCard.make(case1), bundle);
 
-        magicBox.restoreInstanceState(case2, bundle);
+        magicBox.restoreInstanceState(VisitCard.make(case2), bundle);
         System.out.println(case2);
     }
 

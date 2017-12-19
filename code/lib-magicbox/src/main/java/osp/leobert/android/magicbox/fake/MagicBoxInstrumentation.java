@@ -58,12 +58,12 @@ public class MagicBoxInstrumentation extends Instrumentation {
     @Override
     public void callActivityOnRestoreInstanceState(Activity activity, Bundle savedInstanceState) {
         super.callActivityOnRestoreInstanceState(activity, savedInstanceState);
-        MagicBox.getInstance().restoreInstanceState(activity, savedInstanceState);
+        MagicBox.getInstance().restoreInstanceState(VisitCard.make(activity), savedInstanceState);
     }
 
     @Override
     public void callActivityOnRestoreInstanceState(Activity activity, Bundle savedInstanceState, PersistableBundle persistentState) {
         super.callActivityOnRestoreInstanceState(activity, savedInstanceState, persistentState);
-        MagicBox.getInstance().restoreInstanceState(activity, savedInstanceState);
+        MagicBox.getInstance().restoreInstanceState(VisitCard.make(activity), savedInstanceState);
     }
 }

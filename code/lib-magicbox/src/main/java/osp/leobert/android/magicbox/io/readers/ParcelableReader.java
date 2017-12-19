@@ -54,6 +54,11 @@ public class ParcelableReader implements BoxReader {
     }
 
     @Override
+    public boolean preHandleNull() {
+        return false;
+    }
+
+    @Override
     public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
         Field propertyField = field.getField();
         propertyField.setAccessible(true);

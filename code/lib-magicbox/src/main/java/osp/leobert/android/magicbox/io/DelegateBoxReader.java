@@ -31,6 +31,7 @@ import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.model.VisitCard;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io </p>
@@ -54,12 +55,24 @@ public class DelegateBoxReader implements BoxReader {
     }
 
     @Override
+    public boolean preHandleNull() {
+        return true;
+    }
+
+    @Override
     public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        // TODO: 可能需要实例化
         Field propertyField = field.getField();
         propertyField.setAccessible(true);
         Object delegate = propertyField.get(to);
 
-        MagicBox.getInstance().restoreInstanceState(delegate, bundle);
+        VisitCard card;
+        if (delegate == null) {
+//            MagicBox.getLogger().monitor("ignore save delegate for null object");
+//            return;
+            card = VisitCard.make(propertyField.getType(), null);
+        } else
+            card = VisitCard.make(delegate);
+
+        MagicBox.getInstance().restoreInstanceState(card, bundle);
     }
 }

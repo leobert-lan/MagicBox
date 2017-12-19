@@ -193,7 +193,7 @@ public class MagicBoxTest {
 
     @Test
     public void restoreInstanceState() throws Exception {
-        magicBox.restoreInstanceState(test2, bundle);
+        magicBox.restoreInstanceState(VisitCard.make(test2), bundle);
         System.out.println(test2);
     }
 

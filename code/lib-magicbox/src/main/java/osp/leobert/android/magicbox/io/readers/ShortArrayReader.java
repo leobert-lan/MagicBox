@@ -52,6 +52,12 @@ public class ShortArrayReader implements BoxReader {
             instance = new ShortArrayReader();
         return instance;
     }
+
+    @Override
+    public boolean preHandleNull() {
+        return false;
+    }
+
     @Override
     public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
         Field propertyField = field.getField();

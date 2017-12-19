@@ -27,8 +27,13 @@ package osp.leobert.android.magicbox.model;
 
 import android.support.annotation.NonNull;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 import osp.leobert.android.magicbox.MException;
 import osp.leobert.android.magicbox.MagicBox;
+import osp.leobert.android.magicbox.annotations.BeanFactory;
+import osp.leobert.android.magicbox.di.Factory;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.model </p>
@@ -43,8 +48,23 @@ public class VisitCard<T> {
 
     private T oneSelf;
 
+    private Class<? extends Factory> factoryClass;
+
     public VisitCard(Class<T> address) {
         this.address = address;
+        initFactory();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void initFactory() {
+        if (!hasFactory())
+            return;
+
+        BeanFactory beanFactoryNotation = address.getAnnotation(BeanFactory.class);
+        if (beanFactoryNotation == null)
+            return;
+
+        factoryClass = beanFactoryNotation.factory();
     }
 
     private void setOneSelf(T oneSelf) {
@@ -60,12 +80,12 @@ public class VisitCard<T> {
     @SuppressWarnings("unchecked")
     public static <T> VisitCard<T> make(@NonNull T oneSelf) {
         if (oneSelf == null) {
-            final String msg  = "cannot make VisitCard for a null object";
+            final String msg = "cannot make VisitCard for a null object";
             MagicBox.getLogger().error("", msg);
             throw new MException(msg);
         }
 
-        return make((Class<T>)oneSelf.getClass(),oneSelf);
+        return make((Class<T>) oneSelf.getClass(), oneSelf);
     }
 
 
@@ -75,5 +95,24 @@ public class VisitCard<T> {
 
     public T getOneSelf() {
         return oneSelf;
+    }
+
+    public Factory getBeanFactory() { // ignore rawtype
+        if (!hasFactory() || factoryClass == null)
+            return Factory.NullFactory.getInstance();
+
+        try {
+            Constructor constructor = factoryClass.getConstructor();
+            constructor.setAccessible(true);
+            return (Factory) constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+            return Factory.NullFactory.getInstance();
+        }
+
+    }
+
+    private boolean hasFactory() {
+        return address.isAnnotationPresent(BeanFactory.class);
     }
 }
