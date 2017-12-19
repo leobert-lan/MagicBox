@@ -23,29 +23,43 @@
  *
  */
 
-package osp.leobert.android.magicboxsample.test.nested;
+package osp.leobert.android.magicbox.io;
 
-import osp.leobert.android.magicbox.annotations.KeepState;
+import android.os.Bundle;
+
+import java.lang.reflect.Field;
+
+import osp.leobert.android.magicbox.MagicBox;
+import osp.leobert.android.magicbox.model.StateField;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
+ * <p><b>Package:</b> osp.leobert.android.magicbox.io </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> ParentActivity </p>
+ * <p><b>Classname:</b> DelegateBoxReader </p>
  * <p><b>Description:</b> TODO </p>
- * Created by leobert on 2017/12/14.
+ * Created by leobert on 2017/12/18.
  */
 
-public abstract class ParentActivity extends PP {
-    @KeepState
-    private String foo;
+public class DelegateBoxReader implements BoxReader {
+    private static DelegateBoxReader instance = null;
 
-    // super foofoo will be ignored because not annotated with KeepSuperState yet.
-
-    public String getFoo() {
-        return foo;
+    private DelegateBoxReader() {
+        // single
     }
 
-    public void setFoo(String foo) {
-        this.foo = foo;
+    public static DelegateBoxReader getInstance() {
+        if (instance == null)
+            instance = new DelegateBoxReader();
+        return instance;
+    }
+
+    @Override
+    public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
+        // TODO: 可能需要实例化
+        Field propertyField = field.getField();
+        propertyField.setAccessible(true);
+        Object delegate = propertyField.get(to);
+
+        MagicBox.getInstance().restoreInstanceState(delegate, bundle);
     }
 }

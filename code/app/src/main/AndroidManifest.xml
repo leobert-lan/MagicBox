@@ -10,14 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SampleActivity">
+        <activity android:name=".SampleActivity"></activity>
+        <activity android:name=".TempActivity" />
+        <activity android:name=".MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TempActivity"></activity>
+        <activity android:name=".NestedDemo1Activity" />
+        <activity android:name=".NestedDemo2Activity"></activity>
     </application>
 
 </manifest>

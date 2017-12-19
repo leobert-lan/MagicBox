@@ -23,24 +23,43 @@
  *
  */
 
-package osp.leobert.android.magicbox.annotations;
+package osp.leobert.android.magicbox.io;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import android.os.Bundle;
+
+import java.lang.reflect.Field;
+
+import osp.leobert.android.magicbox.MagicBox;
+import osp.leobert.android.magicbox.model.StateField;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicbox.annotations </p>
+ * <p><b>Package:</b> osp.leobert.android.magicbox.io </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> NestedKeep </p>
+ * <p><b>Classname:</b> DelegateBoxWriter </p>
  * <p><b>Description:</b> TODO </p>
- * Created by leobert on 2017/12/18.
+ * Created by leobert on 2017/12/19.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.ANNOTATION_TYPE)
-public @interface NestedKeep {
-    boolean need() default false;
 
-    Class<?> stop() default Object.class;
+public class DelegateBoxWriter implements BoxWriter {
+    private static DelegateBoxWriter instance = null;
+
+    private DelegateBoxWriter() {
+        // single
+    }
+
+    public static DelegateBoxWriter getInstance() {
+        if (instance == null)
+            instance = new DelegateBoxWriter();
+        return instance;
+    }
+
+    @Override
+    public void write(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
+        Field propertyField = field.getField();
+        propertyField.setAccessible(true);
+        Object delegate = propertyField.get(to);
+
+        MagicBox.getInstance().saveInstanceState(delegate, bundle);
+
+    }
 }

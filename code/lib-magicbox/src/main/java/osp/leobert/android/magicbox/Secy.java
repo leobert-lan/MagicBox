@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.annotations.KeepSuperState;
 import osp.leobert.android.magicbox.fake.MagicBoxInstrumentation;
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.model.StateField;
@@ -93,24 +94,41 @@ final class Secy {
         return genStrategy(objectClz);
     }
 
+    @SuppressWarnings("unchecked")
+    private boolean needKeepSuper(@NonNull Class objectClz) {
+        KeepSuperState keepSuperStateNotation =
+                (KeepSuperState) objectClz.getAnnotation(KeepSuperState.class);
+
+        return keepSuperStateNotation != null;
+    }
+
+
     List<StateField> genStrategy(@NonNull Class objectClz) {
+        Class temp = objectClz;
         List<StateField> strategy = new ArrayList<>();
 
-        List<Field> list = Arrays.asList(objectClz.getDeclaredFields());
-        for (int i = 0; i < list.size(); i++) {
-            Field field = list.get(i);
-            if (field.isAnnotationPresent(KeepState.class)) {
-                StateField stateField = analyseField(field);
+        while (true) {
+            List<Field> list = Arrays.asList(temp.getDeclaredFields());
+            for (int i = 0; i < list.size(); i++) {
+                Field field = list.get(i);
+                if (field.isAnnotationPresent(KeepState.class)) {
+                    StateField stateField = analyseField(field, temp.getSimpleName());
 
-                if (stateField != null)
-                    strategy.add(stateField);
+                    if (stateField != null)
+                        strategy.add(stateField);
+                }
             }
+
+            if (!needKeepSuper(temp)) break;
+            temp = temp.getSuperclass();
         }
+
+
         strategies.put(objectClz.getName(), strategy);
         return strategy;
     }
 
-    private StateField analyseField(@NonNull Field field) {
+    private StateField analyseField(@NonNull Field field, String tag) {
         if (!field.isAnnotationPresent(KeepState.class))
             return null;
         KeepState keepStateNotation = null;
@@ -125,7 +143,7 @@ final class Secy {
             throw new MException("check logic,keepStateNotation is not supposed to be null");
 
         String fieldName = field.getName();
-        String bundleKey = "key_" + fieldName;
+        String bundleKey = "key_" + tag + "#" + fieldName;
 
         Type type = keepStateNotation.type();
 

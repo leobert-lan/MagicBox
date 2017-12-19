@@ -35,6 +35,8 @@ import java.util.ArrayList;
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.io.BoxReader;
 import osp.leobert.android.magicbox.io.BoxWriter;
+import osp.leobert.android.magicbox.io.DelegateBoxReader;
+import osp.leobert.android.magicbox.io.DelegateBoxWriter;
 import osp.leobert.android.magicbox.io.readers.BooleanArrayReader;
 import osp.leobert.android.magicbox.io.readers.BooleanReader;
 import osp.leobert.android.magicbox.io.readers.BundleReader;
@@ -254,7 +256,21 @@ public enum Type implements BoxIOComponent, SupposeType {
             return true;
         }
     }, DefaultWriter.getInstance(),
-            DefaultReader.getInstance());
+            DefaultReader.getInstance()),
+
+    Delegate(new SupposeType() {
+        @Override
+        public boolean canBeChecked() {
+            return true;
+        }
+
+        @Override
+        public boolean check(Field field) {
+            return true;
+        }
+    }, DelegateBoxWriter.getInstance(),
+            DelegateBoxReader.getInstance());
+
 
 
     private final SupposeType supposeType;

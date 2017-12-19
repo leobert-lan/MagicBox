@@ -77,6 +77,10 @@ public class MagicBox {
     }
 
     public void saveInstanceState(@NonNull Object object, @NonNull Bundle bundle) {
+        if (object == null) {
+            getLogger().error("[saveInstanceState]","cannot save instance state for null");
+            return;
+        }
         List<StateField> strategy = secy.fetchStrategy(object);
 
         for (StateField field : strategy) {
@@ -84,7 +88,11 @@ public class MagicBox {
         }
     }
 
-    public void restoreInstanceState(Object object, @NonNull Bundle bundle) {
+    public void restoreInstanceState(@NonNull Object object, @NonNull Bundle bundle) {
+        if (object == null) {
+            getLogger().error("[restoreInstanceState]","cannot restore instance state for null");
+            return;
+        }
         List<StateField> strategy = secy.fetchStrategy(object);
 
         for (StateField field : strategy) {

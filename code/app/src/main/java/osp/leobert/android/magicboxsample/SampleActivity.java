@@ -13,9 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.annotations.KeepSuperState;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicboxsample.test.TestPar;
+import osp.leobert.android.magicboxsample.test.nested.ParentActivity;
 
+@KeepSuperState
 public class SampleActivity extends AppCompatActivity {
 
     @KeepState
@@ -106,17 +109,15 @@ public class SampleActivity extends AppCompatActivity {
 
 
         parSparseArray = new SparseArray<>();
-        parSparseArray.append(0,null);
-        parSparseArray.append(1,testPar);
-
-
+        parSparseArray.append(0, null);
+        parSparseArray.append(1, testPar);
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("test","onCreate:"+hashCode());
+        Log.d("test", "onCreate:" + hashCode());
         setContentView(R.layout.activity_sample);
         ((TextView) findViewById(R.id.text)).setText("打开开发者模式，启用：离开后不保留Activity");
 
@@ -137,31 +138,31 @@ public class SampleActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("test","onRestart:"+hashCode());
+        Log.d("test", "onRestart:" + hashCode());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("test","onStart:"+hashCode());
+        Log.d("test", "onStart:" + hashCode());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("test","onStop:"+hashCode());
+        Log.d("test", "onStop:" + hashCode());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("test","onDestroy:"+hashCode());
+        Log.d("test", "onDestroy:" + hashCode());
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("test","test is "+test);
+        Log.d("test", "test is " + test);
     }
 }

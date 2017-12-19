@@ -33,6 +33,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import osp.leobert.android.magicbox.MagicBox;
+import osp.leobert.android.magicbox.annotations.KeepState;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
@@ -72,4 +73,24 @@ public class TestNested {
         magicBox.restoreInstanceState(test2, bundle);
         System.out.println(test2);
     }
+
+    static class Case {
+        @KeepState
+        private Bar bar = new Bar();
+    }
+
+
+        @Test
+    public void test() throws Exception {
+        Case case1 = new Case();
+        Case case2 = new Case();
+        case1.bar.setFoo("foo");
+        case1.bar.setBar("bar");
+        Bundle bundle = new Bundle();
+        magicBox.saveInstanceState(case1, bundle);
+
+        magicBox.restoreInstanceState(case2, bundle);
+        System.out.println(case2);
+    }
+
 }

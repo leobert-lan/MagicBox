@@ -23,23 +23,23 @@
  *
  */
 
-package osp.leobert.android.magicboxsample.test.nested;
+package osp.leobert.android.magicboxsample.test.nested2;
+
+import com.google.gson.Gson;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
+ * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested2 </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> ParentActivity </p>
+ * <p><b>Classname:</b> Foo </p>
  * <p><b>Description:</b> TODO </p>
- * Created by leobert on 2017/12/14.
+ * Created by leobert on 2017/12/18.
  */
 
-public abstract class ParentActivity extends PP {
+public class Foo extends FooBar{
     @KeepState
     private String foo;
-
-    // super foofoo will be ignored because not annotated with KeepSuperState yet.
 
     public String getFoo() {
         return foo;
@@ -47,5 +47,10 @@ public abstract class ParentActivity extends PP {
 
     public void setFoo(String foo) {
         this.foo = foo;
+    }
+
+    @Override
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }

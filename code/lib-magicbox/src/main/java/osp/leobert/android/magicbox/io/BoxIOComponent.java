@@ -63,4 +63,21 @@ public interface BoxIOComponent {
             return DefaultReader.getInstance();
         }
     }
+
+    class DelegateIOComponent implements BoxIOComponent {
+        public DelegateIOComponent() {
+        }
+
+        @NonNull
+        @Override
+        public BoxWriter getBoxWriter() {
+            return DelegateBoxWriter.getInstance();
+        }
+
+        @NonNull
+        @Override
+        public BoxReader getBoxReader() {
+            return DelegateBoxReader.getInstance();
+        }
+    }
 }

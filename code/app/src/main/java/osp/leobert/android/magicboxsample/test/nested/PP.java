@@ -30,22 +30,20 @@ import osp.leobert.android.magicbox.annotations.KeepState;
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
  * <p><b>Project:</b> code </p>
- * <p><b>Classname:</b> ParentActivity </p>
+ * <p><b>Classname:</b> PP </p>
  * <p><b>Description:</b> TODO </p>
- * Created by leobert on 2017/12/14.
+ * Created by leobert on 2017/12/18.
  */
 
-public abstract class ParentActivity extends PP {
+public class PP extends PPP {
     @KeepState
-    private String foo;
+    private String foofoo;
 
-    // super foofoo will be ignored because not annotated with KeepSuperState yet.
-
-    public String getFoo() {
-        return foo;
+    public void setFoofoo(String foofoo) {
+        this.foofoo = foofoo;
     }
 
-    public void setFoo(String foo) {
-        this.foo = foo;
+    public String getFoofoo() {
+        return foofoo;
     }
 }
