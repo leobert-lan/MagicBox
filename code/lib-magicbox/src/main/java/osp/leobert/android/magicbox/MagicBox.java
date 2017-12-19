@@ -89,7 +89,7 @@ public class MagicBox {
     }
 
     public void restoreInstanceState(@NonNull Object object, @NonNull Bundle bundle) {
-        if (object == null) {
+        if (object == null) { //runtime check
             getLogger().error("[restoreInstanceState]","cannot restore instance state for null");
             return;
         }
