@@ -31,6 +31,7 @@ import java.lang.reflect.Field;
 
 import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.model.VisitCard;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io </p>
@@ -59,7 +60,15 @@ public class DelegateBoxWriter implements BoxWriter {
         propertyField.setAccessible(true);
         Object delegate = propertyField.get(to);
 
-        MagicBox.getInstance().saveInstanceState(delegate, bundle);
+        VisitCard card;
+        if (delegate == null) {
+//            MagicBox.getLogger().monitor("ignore save delegate for null object");
+//            return;
+            card = VisitCard.make(propertyField.getType(), null);
+        } else
+            card = VisitCard.make(delegate);
+
+        MagicBox.getInstance().saveInstanceState(card, bundle);
 
     }
 }

@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.model.VisitCard;
 import osp.leobert.android.magicbox.type.Type;
 
 /**
@@ -187,7 +188,7 @@ public class MagicBoxTest {
 
     //    @Test
     public void saveInstanceState() throws Exception {
-        magicBox.saveInstanceState(test1, bundle);
+        magicBox.saveInstanceState(VisitCard.make(test1), bundle);
     }
 
     @Test

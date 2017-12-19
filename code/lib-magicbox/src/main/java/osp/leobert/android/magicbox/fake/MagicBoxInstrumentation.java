@@ -31,6 +31,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import osp.leobert.android.magicbox.MagicBox;
+import osp.leobert.android.magicbox.model.VisitCard;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.proxy </p>
@@ -44,13 +45,13 @@ public class MagicBoxInstrumentation extends Instrumentation {
 
     @Override
     public void callActivityOnSaveInstanceState(Activity activity, Bundle outState) {
-        MagicBox.getInstance().saveInstanceState(activity, outState);
+        MagicBox.getInstance().saveInstanceState(VisitCard.make(activity), outState);
         super.callActivityOnSaveInstanceState(activity, outState);
     }
 
     @Override
     public void callActivityOnSaveInstanceState(Activity activity, Bundle outState, PersistableBundle outPersistentState) {
-        MagicBox.getInstance().saveInstanceState(activity, outState);
+        MagicBox.getInstance().saveInstanceState(VisitCard.make(activity), outState);
         super.callActivityOnSaveInstanceState(activity, outState, outPersistentState);
     }
 

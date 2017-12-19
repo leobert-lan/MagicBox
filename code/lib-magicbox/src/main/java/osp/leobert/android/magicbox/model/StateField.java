@@ -30,6 +30,7 @@ import android.support.annotation.NonNull;
 
 import java.lang.reflect.Field;
 
+import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.MException;
 import osp.leobert.android.magicbox.io.BoxReader;
@@ -94,7 +95,11 @@ public class StateField {
 
     public void save(@NonNull Object object, @NonNull Bundle bundle) {
         BoxWriter writer = getIoComponent().getBoxWriter();
-        // TODO: 2017/12/4  check null
+        if (object == null) { //runtime check
+            MagicBox.getLogger().error("StateField#save","ignore save anything of one null target");
+            return;
+
+        }
         try {
             writer.write(bundle, object, this);
         } catch (IllegalAccessException e) {

@@ -43,6 +43,7 @@ import osp.leobert.android.magicbox.annotations.KeepSuperState;
 import osp.leobert.android.magicbox.fake.MagicBoxInstrumentation;
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.model.VisitCard;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicbox.type.TypeInferUtils;
 
@@ -84,8 +85,16 @@ final class Secy {
         return strategies.containsKey(objectClzPath);
     }
 
+    @Deprecated
+    /**
+     * use {{@link #fetchStrategy(VisitCard)}} instead
+     */
     public List<StateField> fetchStrategy(@NonNull Object obj) {
         return this.fetchStrategy(obj.getClass());
+    }
+
+    public List<StateField> fetchStrategy(@NonNull VisitCard visitCard) {
+        return this.fetchStrategy(visitCard.getAddress());
     }
 
     private List<StateField> fetchStrategy(@NonNull Class objectClz) {

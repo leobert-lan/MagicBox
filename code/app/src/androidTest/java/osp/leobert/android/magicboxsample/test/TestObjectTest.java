@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.annotations.KeepState;
+import osp.leobert.android.magicbox.model.VisitCard;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicboxsample.GsonBoxIOComponent;
 
@@ -54,7 +55,7 @@ public class TestObjectTest {
         wrapper1 = new Wrapper();
         wrapper1.foo();
 
-        magicBox.saveInstanceState(wrapper1,bundle);
+        magicBox.saveInstanceState(VisitCard.make(wrapper1),bundle);
 
     }
 

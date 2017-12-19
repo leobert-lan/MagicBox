@@ -33,6 +33,7 @@ import java.util.List;
 import osp.leobert.android.magicbox.log.ILogger;
 import osp.leobert.android.magicbox.log.impl.DefaultLogger;
 import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.model.VisitCard;
 
 
 /**
@@ -76,15 +77,15 @@ public class MagicBox {
         logger.showMonitor(enable);
     }
 
-    public void saveInstanceState(@NonNull Object object, @NonNull Bundle bundle) {
-        if (object == null) {
+    public void saveInstanceState(@NonNull VisitCard visitCard, @NonNull Bundle bundle) {
+        if (visitCard == null) {
             getLogger().error("[saveInstanceState]","cannot save instance state for null");
             return;
         }
-        List<StateField> strategy = secy.fetchStrategy(object);
+        List<StateField> strategy = secy.fetchStrategy(visitCard);
 
         for (StateField field : strategy) {
-            field.save(object, bundle);
+            field.save(visitCard.getOneSelf(), bundle);
         }
     }
 
