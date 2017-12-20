@@ -55,11 +55,6 @@ public class DelegateBoxReader implements BoxReader {
     }
 
     @Override
-    public boolean preHandleNull() {
-        return true;
-    }
-
-    @Override
     public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
         Field propertyField = field.getField();
         propertyField.setAccessible(true);
@@ -70,6 +65,10 @@ public class DelegateBoxReader implements BoxReader {
 //            MagicBox.getLogger().monitor("ignore save delegate for null object");
 //            return;
             card = VisitCard.make(propertyField.getType(), null);
+            Object bean = card.getBeanFactory().getBean();
+            card = VisitCard.make(card.getAddress(), bean);
+
+            propertyField.set(to, bean);
         } else
             card = VisitCard.make(delegate);
 

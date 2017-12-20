@@ -111,9 +111,9 @@ public class StateField {
 
     public void restore(@NonNull Object object, @NonNull Bundle bundle, @NonNull Factory beanFactory) {
         BoxReader reader = getIoComponent().getBoxReader();
-        if (object == null && reader.preHandleNull()) { //runtime check
-            object = beanFactory.getBean();
-        }
+//        if (object == null && reader.preHandleNull()) { //runtime check
+//            object = beanFactory.getBean();
+//        }
 
         if (object == null) { //runtime check
             MagicBox.getLogger().error("StateField#restore", "ignore restore anything of one null target");

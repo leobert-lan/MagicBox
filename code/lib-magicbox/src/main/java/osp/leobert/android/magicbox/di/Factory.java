@@ -40,7 +40,6 @@ public abstract class Factory<T> {
 
     }
 
-    @BeanProvider
     public abstract T getBean();
 
     public static final class NullFactory extends Factory {

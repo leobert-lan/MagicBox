@@ -39,7 +39,6 @@ import osp.leobert.android.magicbox.model.StateField;
  */
 
 public interface BoxReader {
-    boolean preHandleNull();
 
     void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException;
 }

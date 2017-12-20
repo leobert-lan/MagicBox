@@ -50,10 +50,5 @@ public abstract class BaseCustomBoxReader implements BoxReader {
         propertyField.set(to,fetchAndParse(bundle,bundleKey,propertyField.getType()));
     }
 
-    @Override
-    public final boolean preHandleNull() {
-        return false;
-    }
-
     protected abstract Object fetchAndParse(Bundle bundle, String bundleKey, Class<?> type);
 }
