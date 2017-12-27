@@ -37,7 +37,7 @@ import osp.leobert.android.magicbox.model.VisitCard;
  * <p><b>Package:</b> osp.leobert.android.magicbox.io </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> DelegateBoxReader </p>
- * <p><b>Description:</b> TODO </p>
+ * <p><b>Description:</b> which can inject into the field, and save the state for the field </p>
  * Created by leobert on 2017/12/18.
  */
 

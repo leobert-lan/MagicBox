@@ -34,7 +34,8 @@ import java.lang.annotation.Target;
  * <p><b>Package:</b> osp.leobert.android.magicbox.annotations </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> KeepSuperState </p>
- * <p><b>Description:</b> TODO </p>
+ * <p><b>Description:</b> notation for marking the class need to keep the fields in
+ * super class notated with {@link KeepState}</p>
  * Created by leobert on 2017/12/18.
  */
 @Retention(RetentionPolicy.RUNTIME)

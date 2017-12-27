@@ -36,7 +36,7 @@ import osp.leobert.android.magicbox.di.Factory;
  * <p><b>Package:</b> osp.leobert.android.magicbox.annotations </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> BeanFactory </p>
- * <p><b>Description:</b> TODO </p>
+ * <p><b>Description:</b> notation for Bean Factory </p>
  * Created by leobert on 2017/12/19.
  */
 

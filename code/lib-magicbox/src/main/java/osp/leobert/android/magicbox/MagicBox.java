@@ -101,12 +101,11 @@ public class MagicBox {
         }
     }
 
-    public boolean isStrategyExist(@NonNull Object object) {
-        // TODO: 2017/12/19 not safety
-        return secy.isStrategyExist(object);
+    public boolean isStrategyExist(@NonNull VisitCard visitCard) {
+        return secy.isStrategyExist(visitCard);
     }
 
-    boolean isStrategyExist(@NonNull Class objectClz) {
-        return secy.isStrategyExist(objectClz);
+    public boolean isStrategyExist(@NonNull Class objectClz) {
+        return secy.isStrategyExist(VisitCard.make(objectClz,null));
     }
 }

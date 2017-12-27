@@ -39,7 +39,7 @@ import osp.leobert.android.magicbox.di.Factory;
  * <p><b>Package:</b> osp.leobert.android.magicbox.model </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> VisitCard </p>
- * <p><b>Description:</b> TODO </p>
+ * <p><b>Description:</b> access object of MagicBox </p>
  * Created by leobert on 2017/12/19.
  */
 

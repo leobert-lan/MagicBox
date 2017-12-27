@@ -27,8 +27,9 @@ package osp.leobert.android.magicbox.io.writers;
 
 import android.os.Bundle;
 
-import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.io.BoxWriter;
+import osp.leobert.android.magicbox.model.StateField;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.writers </p>
@@ -53,6 +54,7 @@ public class DefaultWriter implements BoxWriter {
 
     @Override
     public void write(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        // TODO: 2017/12/4 debuglog
+        //only out put log.
+        MagicBox.getLogger().monitor("DefaultWriter used");
     }
 }

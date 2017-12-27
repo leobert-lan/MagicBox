@@ -73,11 +73,11 @@ final class Secy {
     }
 
 
-    boolean isStrategyExist(@NonNull Object object) {
-        return this.isStrategyExist(object.getClass());
+    boolean isStrategyExist(@NonNull VisitCard visitCard) {
+        return this.isStrategyExist(visitCard.getAddress());
     }
 
-    boolean isStrategyExist(@NonNull Class objectClz) {
+    private boolean isStrategyExist(@NonNull Class objectClz) {
         return this.isStrategyExist(objectClz.getName());
     }
 

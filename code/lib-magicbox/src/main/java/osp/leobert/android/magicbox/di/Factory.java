@@ -25,13 +25,11 @@
 
 package osp.leobert.android.magicbox.di;
 
-import osp.leobert.android.magicbox.annotations.BeanProvider;
-
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.di </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> Factory </p>
- * <p><b>Description:</b> TODO </p>
+ * <p><b>Description:</b> Bean Factory </p>
  * Created by leobert on 2017/12/19.
  */
 

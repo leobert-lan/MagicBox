@@ -27,8 +27,9 @@ package osp.leobert.android.magicbox.io.readers;
 
 import android.os.Bundle;
 
-import osp.leobert.android.magicbox.model.StateField;
+import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.io.BoxReader;
+import osp.leobert.android.magicbox.model.StateField;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.io.readers </p>
@@ -53,6 +54,7 @@ public class DefaultReader implements BoxReader {
 
     @Override
     public void read(Bundle bundle, Object to, StateField field) throws IllegalAccessException {
-        // TODO: 2017/12/4 debuglog
+        //only out put log.
+        MagicBox.getLogger().monitor("DefaultReader used");
     }
 }
