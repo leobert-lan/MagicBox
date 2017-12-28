@@ -44,7 +44,6 @@ import osp.leobert.android.magicbox.type.Type;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-//@Inherited
 public @interface KeepState {
 
     Type type() default Type.Infer;
@@ -53,7 +52,4 @@ public @interface KeepState {
      * @return a class implement {@link BoxIOComponent} with a public empty constructor
      */
     Class<? extends BoxIOComponent> io() default BoxIOComponent.DefaultComponent.class;
-
-
-//    BoxIO io() default @BoxIO();
 }

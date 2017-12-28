@@ -27,6 +27,8 @@ package osp.leobert.android.magicboxsample.test.nested2;
 
 import com.google.gson.Gson;
 
+import osp.leobert.android.magicbox.annotations.KeepState;
+
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested2 </p>
  * <p><b>Project:</b> code </p>
@@ -36,6 +38,7 @@ import com.google.gson.Gson;
  */
 
 public class FooBar {
+    @KeepState
     private String foobar;
 
     public String getFoobar() {
