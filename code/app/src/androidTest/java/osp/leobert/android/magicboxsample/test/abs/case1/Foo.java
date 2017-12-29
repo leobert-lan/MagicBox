@@ -23,27 +23,18 @@
  *
  */
 
-package osp.leobert.android.magicboxsample.test.nested;
-
-import osp.leobert.android.magicbox.annotations.KeepState;
+package osp.leobert.android.magicboxsample.test.abs.case1;
 
 /**
- * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>
+ * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.abs.case1 </p>
  * <p><b>Project:</b> code </p>
  * <p><b>Classname:</b> Foo2 </p>
  * <p><b>Description:</b> TODO </p>
- * Created by leobert on 2017/12/14.
+ * Created by leobert on 28/12/2017.
  */
 
-class Foo {
-    @KeepState
-    String foo;
+public abstract class Foo {
+    // nothing
 
-    public String getFoo() {
-        return foo;
-    }
-
-    public void setFoo(String foo) {
-        this.foo = foo;
-    }
+    public abstract void setup();
 }
