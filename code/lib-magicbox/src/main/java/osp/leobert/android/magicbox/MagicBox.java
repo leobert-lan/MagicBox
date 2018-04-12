@@ -45,6 +45,8 @@ import osp.leobert.android.magicbox.model.VisitCard;
  */
 
 public class MagicBox {
+    private static final String MD5_HAS_ACTIVITY_CYCLED = "4E3E7EEDC6F139B3";
+
     private static MagicBox instance = null;
 
     private Secy secy;
@@ -77,11 +79,19 @@ public class MagicBox {
         logger.showMonitor(enable);
     }
 
+    public boolean hasActivityCycled(Bundle bundle) {
+        if (bundle == null)
+            return false;
+
+        return bundle.getBoolean(MD5_HAS_ACTIVITY_CYCLED, false);
+    }
+
     public void saveInstanceState(@NonNull VisitCard visitCard, @NonNull Bundle bundle) {
         if (visitCard == null) {
-            getLogger().error("[saveInstanceState]","cannot save instance state for null");
+            getLogger().error("[saveInstanceState]", "cannot save instance state for null");
             return;
         }
+        onSaveInstanceState(bundle);
         List<StateField> strategy = secy.fetchStrategy(visitCard);
 
         for (StateField field : strategy) {
@@ -89,16 +99,26 @@ public class MagicBox {
         }
     }
 
+    private void onSaveInstanceState(@NonNull Bundle bundle) {
+        bundle.putBoolean(MD5_HAS_ACTIVITY_CYCLED, true);
+    }
+
     public void restoreInstanceState(@NonNull VisitCard visitCard, @NonNull Bundle bundle) {
         if (visitCard == null) { //runtime check
-            getLogger().error("[restoreInstanceState]","cannot restore instance state for null");
+            getLogger().error("[restoreInstanceState]", "cannot restore instance state for null");
             return;
         }
+        onRestoreInstanceState(bundle);
         List<StateField> strategy = secy.fetchStrategy(visitCard);
 
         for (StateField field : strategy) {
-            field.restore(visitCard.getOneSelf(), bundle,visitCard.getBeanFactory());
+            field.restore(visitCard.getOneSelf(), bundle, visitCard.getBeanFactory());
         }
+    }
+
+    private void onRestoreInstanceState(@NonNull Bundle bundle) {
+        if (bundle.containsKey(MD5_HAS_ACTIVITY_CYCLED))
+            bundle.remove(MD5_HAS_ACTIVITY_CYCLED);
     }
 
     public boolean isStrategyExist(@NonNull VisitCard visitCard) {
@@ -106,6 +126,6 @@ public class MagicBox {
     }
 
     public boolean isStrategyExist(@NonNull Class objectClz) {
-        return secy.isStrategyExist(VisitCard.make(objectClz,null));
+        return secy.isStrategyExist(VisitCard.make(objectClz, null));
     }
 }
