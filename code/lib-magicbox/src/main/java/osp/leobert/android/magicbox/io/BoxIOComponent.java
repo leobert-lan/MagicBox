@@ -25,7 +25,7 @@
 
 package osp.leobert.android.magicbox.io;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import osp.leobert.android.magicbox.io.readers.DefaultReader;
 import osp.leobert.android.magicbox.io.writers.DefaultWriter;

@@ -1,7 +1,7 @@
 package osp.leobert.android.magicboxsample.test;
 
 import android.os.Bundle;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -26,7 +26,7 @@
 package osp.leobert.android.magicbox.model;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Field;
 

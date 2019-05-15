@@ -28,7 +28,7 @@ package osp.leobert.android.magicbox;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.runner.AndroidJUnit4;
 import android.util.SparseArray;
 
 import org.junit.Before;

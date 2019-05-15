@@ -25,7 +25,7 @@
 
 package osp.leobert.android.magicbox.type.cluster;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;

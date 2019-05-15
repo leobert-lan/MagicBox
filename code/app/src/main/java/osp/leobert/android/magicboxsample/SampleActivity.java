@@ -3,7 +3,7 @@ package osp.leobert.android.magicboxsample;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
@@ -16,7 +16,6 @@ import osp.leobert.android.magicbox.annotations.KeepState;
 import osp.leobert.android.magicbox.annotations.KeepSuperState;
 import osp.leobert.android.magicbox.type.Type;
 import osp.leobert.android.magicboxsample.test.TestPar;
-import osp.leobert.android.magicboxsample.test.nested.ParentActivity;
 
 @KeepSuperState
 public class SampleActivity extends AppCompatActivity {

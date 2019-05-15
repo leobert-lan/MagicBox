@@ -25,7 +25,7 @@
 
 package osp.leobert.android.magicbox.model;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

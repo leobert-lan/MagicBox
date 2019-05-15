@@ -26,7 +26,7 @@
 package osp.leobert.android.magicboxsample.test.testFinal;
 
 import android.os.Bundle;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,10 +36,6 @@ import org.junit.runner.RunWith;
 import osp.leobert.android.magicbox.MagicBox;
 import osp.leobert.android.magicbox.annotations.KeepState;
 import osp.leobert.android.magicbox.model.VisitCard;
-import osp.leobert.android.magicboxsample.test.abs.case1.Bar;
-import osp.leobert.android.magicboxsample.test.abs.case1.Foo;
-import osp.leobert.android.magicboxsample.test.abs.case2.Bar2;
-import osp.leobert.android.magicboxsample.test.abs.case2.Foo2;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test </p>

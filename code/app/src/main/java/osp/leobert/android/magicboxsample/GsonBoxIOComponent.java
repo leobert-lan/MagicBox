@@ -1,6 +1,6 @@
 package osp.leobert.android.magicboxsample;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import osp.leobert.android.magicbox.io.BoxIOComponent;
 import osp.leobert.android.magicbox.io.BoxReader;

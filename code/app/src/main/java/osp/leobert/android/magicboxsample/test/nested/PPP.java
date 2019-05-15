@@ -25,7 +25,7 @@
 
 package osp.leobert.android.magicboxsample.test.nested;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicboxsample.test.nested </p>

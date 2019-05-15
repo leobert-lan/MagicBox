@@ -25,7 +25,7 @@
 
 package osp.leobert.android.magicbox.type.cluster;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * <p><b>Package:</b> osp.leobert.android.magicbox.type.cluster </p>

@@ -1,9 +1,13 @@
 package osp.leobert.android.magicboxsample;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.luojilab.router.facade.annotation.Autowired;
+
 public class TempActivity extends AppCompatActivity {
+//    @Autowired
+//    int m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

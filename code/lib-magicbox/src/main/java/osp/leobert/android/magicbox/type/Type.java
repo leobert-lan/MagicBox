@@ -27,6 +27,7 @@ package osp.leobert.android.magicbox.type;
 
 
 import android.os.Parcelable;
+import androidx.annotation.RequiresApi;
 import android.util.SparseArray;
 
 import java.lang.reflect.Field;
@@ -60,8 +61,6 @@ import osp.leobert.android.magicbox.io.readers.ParcelableReader;
 import osp.leobert.android.magicbox.io.readers.SerializableReader;
 import osp.leobert.android.magicbox.io.readers.ShortArrayReader;
 import osp.leobert.android.magicbox.io.readers.ShortReader;
-import osp.leobert.android.magicbox.io.readers.SizeFReader;
-import osp.leobert.android.magicbox.io.readers.SizeReader;
 import osp.leobert.android.magicbox.io.readers.SparseParcelableArrayReader;
 import osp.leobert.android.magicbox.io.readers.StringArrayListReader;
 import osp.leobert.android.magicbox.io.readers.StringArrayReader;
@@ -90,8 +89,6 @@ import osp.leobert.android.magicbox.io.writers.ParcelableWriter;
 import osp.leobert.android.magicbox.io.writers.SerializableWriter;
 import osp.leobert.android.magicbox.io.writers.ShortArrayWriter;
 import osp.leobert.android.magicbox.io.writers.ShortWriter;
-import osp.leobert.android.magicbox.io.writers.SizeFWriter;
-import osp.leobert.android.magicbox.io.writers.SizeWriter;
 import osp.leobert.android.magicbox.io.writers.SparseParcelableArrayWriter;
 import osp.leobert.android.magicbox.io.writers.StringArrayListWriter;
 import osp.leobert.android.magicbox.io.writers.StringArrayWriter;
@@ -167,13 +164,15 @@ public enum Type implements BoxIOComponent, SupposeType {
             ParcelableWriter.getInstance(),
             ParcelableReader.getInstance()),
 
-    Size(new SimpleType(android.util.Size.class),
-            SizeWriter.getInstance(),
-            SizeReader.getInstance()),
-
-    SizeF(new SimpleType(android.util.SizeF.class),
-            SizeFWriter.getInstance(),
-            SizeFReader.getInstance()),
+//    @RequiresApi(21)
+//    Size(new SimpleType(android.util.Size.class),
+//            SizeWriter.getInstance(),
+//            SizeReader.getInstance()),
+//
+//    @RequiresApi(21)
+//    SizeF(new SimpleType(android.util.SizeF.class),
+//            SizeFWriter.getInstance(),
+//            SizeFReader.getInstance()),
 
     Serializable(new Implementation(java.io.Serializable.class),
             SerializableWriter.getInstance(),

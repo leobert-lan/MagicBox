@@ -25,6 +25,10 @@
 
 package osp.leobert.android.magicbox.type;
 
+//import android.annotation.TargetApi;
+import android.os.Build;
+//import android.support.annotation.RequiresApi;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 
@@ -70,10 +74,16 @@ public class TypeInferUtils {
             Type.Double,
     };
 
+//    @RequiresApi(21)
     private static Type[] simpleTypes = new Type[]{
             Type.String,
-            Type.Size,
-            Type.SizeF,
+//            Type.Size,
+//            Type.SizeF,
+            Type.Bundle
+    };
+
+    private static Type[] simpleTypesV14 = new Type[]{
+            Type.String,
             Type.Bundle
     };
 
@@ -206,7 +216,25 @@ public class TypeInferUtils {
         return Type.Infer;
     }
 
+    private static Type inferSimpleTypeV14(Field field) {
+        if (field == null)
+            return Type.Null;
+        for (Type type : simpleTypesV14) {
+            if (type.check(field))
+                return type;
+        }
+        return Type.Infer;
+    }
+
     private static Type inferSimpleType(Field field) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return inferSimpleTypeV14(field);
+        }
+        return inferSimpleTypeV21(field);
+    }
+
+//    @TargetApi(21)
+    private static Type inferSimpleTypeV21(Field field) {
         if (field == null)
             return Type.Null;
         for (Type type : simpleTypes) {

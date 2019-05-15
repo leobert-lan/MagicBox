@@ -27,7 +27,7 @@ package osp.leobert.android.magicbox;
 
 import android.annotation.SuppressLint;
 import android.app.Instrumentation;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -161,7 +161,16 @@ final class Secy {
         else if (type == Type.Object) {
             try {
                 return analyseCustoms(field, keepStateNotation);
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                throw new MException(e.getMessage());
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                throw new MException(e.getMessage());
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+                throw new MException(e.getMessage());
+            } catch (InstantiationException e) {
                 e.printStackTrace();
                 throw new MException(e.getMessage());
             }
